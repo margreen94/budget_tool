@@ -8,16 +8,16 @@ export default function Header() {
     <div className="header">
       <Navbar collapseOnSelect expand="lg" variant="dark">
         <Container>
-          <Navbar.Brand style={{ fontSize: 28 }} href="/">
-            Bugdet Tool
-          </Navbar.Brand>
+          <LinkContainer to="/" style={{ fontSize: 28 }}>
+            <Navbar.Brand>Bugdet Tool</Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse
             className="justify-content-end"
             id="responsive-navbar-nav"
           >
             <Nav style={{ fontSize: 20 }}>
-              <LinkContainer to="/BudgetOverview">
+              <LinkContainer to="/">
                 <Nav.Link>Budget Overview</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/BucketEdit">

@@ -14,7 +14,7 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route path="/BudgetOverview" component={BudgetOverview} />
+          <Route path="/" exact component={BudgetOverview} />
           <Route path="/BucketEdit" component={BucketEdit} />
           <Route path="/TransactionHistory" component={TransactionHistory} />
         </Switch>
