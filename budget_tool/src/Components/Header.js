@@ -8,7 +8,7 @@ export default function Header() {
     <div className="header">
       <Navbar collapseOnSelect expand="lg" variant="dark">
         <Container>
-          <LinkContainer to="/" style={{ fontSize: 28 }}>
+          <LinkContainer to="/" exact style={{ fontSize: 28 }}>
             <Navbar.Brand>Budget Tool</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -17,8 +17,8 @@ export default function Header() {
             id="responsive-navbar-nav"
           >
             <Nav className="mr-auto" style={{ fontSize: 20 }}>
-              <LinkContainer to="/">
-                <Nav.Link href="/">Budget Overview</Nav.Link>
+              <LinkContainer to="/" exact={true}>
+                <Nav.Link>Budget Overview</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/BucketEdit">
                 <Nav.Link>Bucket Edit</Nav.Link>
