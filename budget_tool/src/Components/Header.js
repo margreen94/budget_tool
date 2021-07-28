@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 export default function Header() {
   return (
@@ -16,9 +17,15 @@ export default function Header() {
             id="responsive-navbar-nav"
           >
             <Nav style={{ fontSize: 20 }}>
-              <Nav.Link href="/">Budget Overview</Nav.Link>
-              <Nav.Link href="/bucketEdit">Bucket Edit</Nav.Link>
-              <Nav.Link href="transactionHistory">Transaction History</Nav.Link>
+              <LinkContainer to="/BudgetOverview">
+                <Nav.Link>Budget Overview</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/BucketEdit">
+                <Nav.Link>Bucket Edit</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="TransactionHistory">
+                <Nav.Link>Transaction History</Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>

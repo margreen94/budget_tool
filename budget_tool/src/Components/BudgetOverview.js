@@ -1,9 +1,14 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 
 export default function BudgetOverview() {
+  console.log("worthless");
+
   return (
     <div>
-      <h1>Budget</h1>
+      <Container>
+        <h1>why you no work</h1>
+      </Container>
     </div>
   );
 }
