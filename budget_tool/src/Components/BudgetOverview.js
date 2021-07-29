@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { Card, ListGroupItem, ListGroup, Row, Col } from "react-bootstrap"
+import { Card, ListGroupItem, ListGroup, Row, Col, Button } from "react-bootstrap"
 import carimage from "../images/carimage.jpg"
 import food from "../images/food.jpg"
 import house from "../images/house.jpg"
@@ -13,7 +13,6 @@ export default function BudgetOverview() {
     <div>
       <Container>
         <Row>
-          
           <Col>
             <Card style={{ width: '19rem' }}>
               <Card.Img variant="top" src={food} />
@@ -53,8 +52,6 @@ export default function BudgetOverview() {
               </Card.Body>
             </Card>  
           </Col>
-        {/* </Row> */}
-        {/* <Row> */}
           <Col>
             <Card style={{ width: '19rem' }}>
               <Card.Img variant="top" src={house} />
@@ -94,7 +91,64 @@ export default function BudgetOverview() {
               </Card.Body>
             </Card>  
           </Col>
+        </Row>
 
+        <Row>
+          <Card style={{ width: '15rem' }}>
+            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Body>
+              <Card.Title>News Article</Card.Title>
+              <Card.Text>
+                Display an article about finance maybe?
+              </Card.Text>
+              <Button variant="primary">Link to Article</Button>
+            </Card.Body>
+          </Card>
+
+          <Card style={{ width: '15rem' }}>
+            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Body>
+              <Card.Title>News Article</Card.Title>
+              <Card.Text>
+                Display an article about finance maybe?
+              </Card.Text>
+              <Button variant="primary">Link to Article</Button>
+            </Card.Body>
+          </Card>
+
+          <Card style={{ width: '15rem' }}>
+            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Body>
+              <Card.Title>News Article</Card.Title>
+              <Card.Text>
+                Display an article about finance maybe?
+              </Card.Text>
+              <Button variant="primary">Link to Article</Button>
+            </Card.Body>
+          </Card>
+
+          <Card style={{ width: '15rem' }}>
+            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Body>
+              <Card.Title>News Article</Card.Title>
+              <Card.Text>
+                Display an article about finance maybe?
+              </Card.Text>
+              <Button variant="primary">Link to Article</Button>
+            </Card.Body>
+          </Card>
+
+          <Card style={{ width: '15rem' }}>
+            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Body>
+              <Card.Title>News Article</Card.Title>
+              <Card.Text>
+                Display an article about finance maybe?
+              </Card.Text>
+              <Button variant="primary">Link to Article</Button>
+            </Card.Body>
+          </Card>
+          
         </Row>
       </Container>
     </div>
