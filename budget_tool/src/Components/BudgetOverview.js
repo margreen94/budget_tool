@@ -1,5 +1,10 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import { Card, ListGroupItem, ListGroup, Row, Col } from "react-bootstrap"
+import carimage from "../images/carimage.jpg"
+import food from "../images/food.jpg"
+import house from "../images/house.jpg"
+import other from "../images/other.jpg"
 
 export default function BudgetOverview() {
   console.log("worthless");
@@ -7,7 +12,90 @@ export default function BudgetOverview() {
   return (
     <div>
       <Container>
-        <h1>why you no work</h1>
+        <Row>
+          
+          <Col>
+            <Card style={{ width: '19rem' }}>
+              <Card.Img variant="top" src={food} />
+              <Card.Body>
+                <Card.Title>Food</Card.Title>
+                  <Card.Text>
+                    Overview of Food spending
+                  </Card.Text>
+              </Card.Body>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>Total Spent</ListGroupItem>
+                <ListGroupItem>Amount</ListGroupItem>
+                <ListGroupItem>Percent of Budget</ListGroupItem>
+              </ListGroup>
+              <Card.Body>
+                <Card.Link href="#">See All Food Transactions</Card.Link>
+              </Card.Body>
+            </Card>  
+          </Col>
+
+          <Col>
+            <Card style={{ width: '19rem' }}>
+              <Card.Img variant="top" src={carimage} />
+              <Card.Body>
+                <Card.Title>Auto</Card.Title>
+                  <Card.Text>
+                    Overview of Auto spending
+                  </Card.Text>
+              </Card.Body>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>Total Spent</ListGroupItem>
+                <ListGroupItem>Amount</ListGroupItem>
+                <ListGroupItem>Percent of Budget</ListGroupItem>
+              </ListGroup>
+              <Card.Body>
+                <Card.Link href="#">See All Auto Transactions</Card.Link>
+              </Card.Body>
+            </Card>  
+          </Col>
+        {/* </Row> */}
+        {/* <Row> */}
+          <Col>
+            <Card style={{ width: '19rem' }}>
+              <Card.Img variant="top" src={house} />
+              <Card.Body>
+                <Card.Title>Home</Card.Title>
+                  <Card.Text>
+                    Overview of Home spending
+                  </Card.Text>
+              </Card.Body>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>Total Spent</ListGroupItem>
+                <ListGroupItem>Amount</ListGroupItem>
+                <ListGroupItem>Percent of Budget</ListGroupItem>
+              </ListGroup>
+              <Card.Body>
+                <Card.Link href="#">See All Home Transactions</Card.Link>
+              </Card.Body>
+            </Card>  
+          </Col>
+
+          <Col>
+            <Card style={{ width: '19rem' }}>
+              <Card.Img variant="top" src={other} />
+              <Card.Body>
+                <Card.Title>Other</Card.Title>
+                  <Card.Text>
+                    Overview of Other spending
+                  </Card.Text>
+              </Card.Body>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>Total Spent</ListGroupItem>
+                <ListGroupItem>Amount</ListGroupItem>
+                <ListGroupItem>Percent of Budget</ListGroupItem>
+              </ListGroup>
+              <Card.Body>
+                <Card.Link href="#">See All Other Transactions</Card.Link>
+              </Card.Body>
+            </Card>  
+          </Col>
+
+        </Row>
       </Container>
     </div>
   );
