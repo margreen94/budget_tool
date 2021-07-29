@@ -1,5 +1,6 @@
 import React from "react";
 
 export default function Footer() {
-  return <div className="footer">Copyright 2021</div>;
+  const curr_year = new Date().getFullYear();
+  return <div className="footer">&copy; {curr_year}</div>;
 }

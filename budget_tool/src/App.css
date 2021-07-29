@@ -1,10 +1,13 @@
 .header {
-  background-color: lightblue;
+  background-color: #50104A;
   text-align: center;
 }
 
+
 .footer {
-  background-color: lightblue;
+  background-color: #50104A;
+  color: white;
+  padding: 10px;
   text-align: center;
   bottom: 0;
   position: fixed;
