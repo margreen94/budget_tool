@@ -1,30 +1,45 @@
-import React from "react";
+import React, { Component } from 'react'
 import axios from "axios";
+import SingleBucketEdit from './SingleBucketEdit';
 
-function getPercentage(e){
-  e.preventDefault()
-  axios({
-    url: "/getByAccountId/25",
-    method: "GET",
-  }).then((response) => {
-    console.log(response)
-  }).catch(function (error) {
-        console.log(error);  
-      })
 
+
+export default class BucketEdit extends Component {
+
+  state = {
+    BucketData: null
+  };
+  
+  componentDidMount() {
+    // e.preventDefault()
+    axios({
+      url: "/getByAccountId/25",
+      method: "GET",
+    }).then((response) => {
+      this.setState({BucketData: response.data})
+    })
   }
-
-export default function BucketEdit() {
-
   
 
-  return (
-    <div>
-      <h1>Bucket </h1>
-      <form>
-        <label>Car Percentage:<input type='text'></input></label>
-        <input type='submit' onClick={getPercentage}></input>
-      </form>
-    </div>
-  );
+
+
+  render() {
+
+    var buckets = []
+    for(var i in this.state.BucketData) {
+      var bucket = this.state.BucketData[i];
+      buckets.push(<SingleBucketEdit name={bucket.name} percent={bucket.percent}/>)
+    }
+
+    return (
+      <div>
+        <h1>EDIT BUCKET SETTINGS</h1>
+        <form>
+        {buckets}     
+        <input type='submit'></input>
+        </form>
+      </div>
+    )
+  }
 }
+
