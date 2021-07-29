@@ -4,7 +4,7 @@ import axios from "axios";
 function getPercentage(e){
   e.preventDefault()
   axios({
-    url: "localhost:8080/getByAccountId/25",
+    url: "/getByAccountId/25",
     method: "GET",
   }).then((response) => {
     console.log(response)
