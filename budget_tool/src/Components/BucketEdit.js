@@ -28,7 +28,7 @@ export default class BucketEdit extends Component {
     var buckets = []
     for(var i in this.state.BucketData) {
       var bucket = this.state.BucketData[i];
-      buckets.push(<SingleBucketEdit name={bucket.name} percent={bucket.percent}/>)
+      buckets.push(<SingleBucketEdit key={i} name={bucket.name} percent={bucket.percent}/>)
     }
 
     return (
