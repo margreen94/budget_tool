@@ -13,3 +13,7 @@
   position: fixed;
   width: 100vw;
 }
+
+.spacing{
+  padding-top:1em;
+}
