@@ -7,6 +7,7 @@ import Footer from "./Components/Footer";
 import BucketEdit from "./Components/BucketEdit";
 import BudgetOverview from "./Components/BudgetOverview";
 import TransactionHistory from "./Components/TransactionHistory";
+import AddTransaction from "./Components/AddTransaction";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" exact component={BudgetOverview} />
           <Route path="/BucketEdit" component={BucketEdit} />
           <Route path="/TransactionHistory" component={TransactionHistory} />
+          <Route path="/AddTransaction" component={AddTransaction} />
         </Switch>
         <Footer />
       </Router>
