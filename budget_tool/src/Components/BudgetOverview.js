@@ -1,5 +1,6 @@
 import React from "react";
 import "../App.css";
+import { Doughnut } from "react-chartjs-2";
 import { Container } from "react-bootstrap";
 import {
   Card,
@@ -13,13 +14,43 @@ import carimage from "../images/carimage.jpg";
 import food from "../images/food.jpg";
 import house from "../images/house.jpg";
 import other from "../images/other.jpg";
+import data from "./data";
 
 export default function BudgetOverview() {
+  const percentage = (tooltipItems) => {
+    let percent = 0;
+    tooltipItems.forEach(function (tooltipItem) {
+      percent = tooltipItem.parsed;
+    });
+    return "" + percent + "%";
+  };
   return (
     <div>
       <Container>
         {/* Pie chart */}
-        <Row className="spacing">insert pie chart here</Row>
+        <Row className="spacing">
+          <Col>
+            <Doughnut
+              data={data}
+              height={300}
+              width={300}
+              options={{
+                maintainAspectRatio: false,
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "My Budget",
+                  },
+                  tooltip: {
+                    callbacks: {
+                      footer: percentage,
+                    },
+                  },
+                },
+              }}
+            />
+          </Col>
+        </Row>
         {/* Start of the buket cards */}
         <Row className="spacing">
           <Col>
