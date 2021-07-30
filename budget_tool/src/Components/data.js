@@ -1,9 +1,17 @@
+import axios from "axios";
+//get data for the pie chart
+import React from "react";
+import { Component } from "react";
+
+const nameData = [];
+const percentData = [];
+//data for the pie chart
 export const data = {
-  labels: ["Food", "Auto", "Home", "Other"],
+  labels: nameData,
   datasets: [
     {
       label: "Percentages from total budget",
-      data: [10, 20, 30, 40],
+      data: percentData,
       backgroundColor: [
         "rgba(255, 99, 132, 0.2)",
         "rgba(54, 162, 235, 0.2)",
@@ -22,6 +30,7 @@ export const data = {
     },
   ],
 };
+//options for the pie chart
 const percentage = (tooltipItem, data) => {
   //   console.log("data" + data);
   //   console.log(tooltipItem);
@@ -33,7 +42,9 @@ export const options = {
     title: {
       display: true,
       text: "My Budget",
-      fontSize: 25,
+      font: {
+        size: 25,
+      },
     },
     legend: {
       position: "bottom",
