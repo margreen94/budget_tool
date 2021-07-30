@@ -1,4 +1,4 @@
-const data = {
+export const data = {
   labels: ["Food", "Auto", "Home", "Other"],
   datasets: [
     {
@@ -22,5 +22,26 @@ const data = {
     },
   ],
 };
-
-export default data;
+const percentage = (tooltipItem, data) => {
+  //   console.log("data" + data);
+  //   console.log(tooltipItem);
+  return tooltipItem.label + ": " + tooltipItem.parsed + "%";
+};
+export const options = {
+  maintainAspectRatio: false,
+  plugins: {
+    title: {
+      display: true,
+      text: "My Budget",
+      fontSize: 25,
+    },
+    legend: {
+      position: "bottom",
+    },
+    tooltip: {
+      callbacks: {
+        label: percentage,
+      },
+    },
+  },
+};

@@ -14,41 +14,15 @@ import carimage from "../images/carimage.jpg";
 import food from "../images/food.jpg";
 import house from "../images/house.jpg";
 import other from "../images/other.jpg";
-import data from "./data";
-
+import { data, options } from "./data";
 export default function BudgetOverview() {
-  const percentage = (tooltipItems) => {
-    let percent = 0;
-    tooltipItems.forEach(function (tooltipItem) {
-      percent = tooltipItem.parsed;
-    });
-    return "" + percent + "%";
-  };
   return (
     <div>
       <Container>
         {/* Pie chart */}
         <Row className="spacing">
           <Col>
-            <Doughnut
-              data={data}
-              height={300}
-              width={300}
-              options={{
-                maintainAspectRatio: false,
-                plugins: {
-                  title: {
-                    display: true,
-                    text: "My Budget",
-                  },
-                  tooltip: {
-                    callbacks: {
-                      footer: percentage,
-                    },
-                  },
-                },
-              }}
-            />
+            <Doughnut data={data} height={300} width={300} options={options} />
           </Col>
         </Row>
         {/* Start of the buket cards */}
