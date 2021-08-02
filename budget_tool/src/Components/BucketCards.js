@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
+import "../App.css";
+
+import { Row } from "react-bootstrap";
 import { Card, ListGroupItem, ListGroup, Col } from "react-bootstrap";
 import { images } from "./images";
 
@@ -9,8 +11,8 @@ export default class BucketCards extends Component {
 
     for (var i in this.props.cardData) {
       cards.push(
-        <Col key={i}>
-          <Card style={{ width: "19rem" }}>
+        <Col md={4} key={i} className="spacing">
+          <Card>
             <Card.Img variant="top" src={images[this.props.cardData[i].name]} />
             <Card.Body>
               <Card.Title>{this.props.cardData[i].name}</Card.Title>
@@ -43,6 +45,6 @@ export default class BucketCards extends Component {
         </Col>
       );
     }
-    return <div>{cards}</div>;
+    return <Row className="spacing">{cards}</Row>;
   }
 }
