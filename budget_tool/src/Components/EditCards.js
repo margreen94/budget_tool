@@ -1,25 +1,24 @@
 import React, { Component } from "react";
 import "../App.css";
-import axios from "axios";
 
 import { Row } from "react-bootstrap";
 import { Card, ListGroupItem, ListGroup, Col } from "react-bootstrap";
-function editBucket(id, percent) {
-  axios({
-    url: "editBucket/" + id,
-    method: "PUT",
-    data: {
-      percent: percent,
-    },
-  });
-}
+
 export default class EditCards extends Component {
+
+  constructor(props){
+    super(props)
+    this.setEditedBuckets = this.setEditedBuckets.bind(this)
+  }
+
+  setEditedBuckets(e){
+    this.props.addFunc({id: e.target.id, percent: e.target.value })
+  }
+
   render() {
     const cards = [];
 
     for (var i in this.props.editData) {
-      let gettingName = this.props.editData[i].name;
-      let gettingID = this.props.editData[i].id;
       cards.push(
         <Col md={4} key={i} className="spacing">
           <Card>
@@ -41,19 +40,9 @@ export default class EditCards extends Component {
               </ListGroupItem>
               <input
                 type="number"
-                id={this.props.editData[i].name}
+                id={this.props.editData[i].id}
                 name="fname"
-              ></input>
-
-              <input
-                type="submit"
-                value="Submit"
-                onClick={() =>
-                  editBucket(
-                    gettingID,
-                    document.getElementById(gettingName).value
-                  )
-                }
+                onChange={this.setEditedBuckets}
               ></input>
             </ListGroup>
           </Card>
