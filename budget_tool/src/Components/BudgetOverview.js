@@ -10,13 +10,10 @@ import {
   Button,
 } from "react-bootstrap";
 import axios from "axios";
-import carimage from "../images/carimage.jpg";
-import food from "../images/food.jpg";
-import house from "../images/house.jpg";
-import other from "../images/other.jpg";
 
 import { Component } from "react";
 import PieChart from "./PieChart";
+import BucketCards from "./BucketCards";
 
 export default class BudgetOverview extends Component {
   state = {
@@ -44,25 +41,9 @@ export default class BudgetOverview extends Component {
           </Row>
           {/* Start of the buket cards */}
           <Row className="spacing">
-            <Col>
-              <Card style={{ width: "19rem" }}>
-                <Card.Img variant="top" src={food} />
-                <Card.Body>
-                  <Card.Title>Food</Card.Title>
-                  <Card.Text>Overview of Food spending</Card.Text>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                  <ListGroupItem>Total Spent</ListGroupItem>
-                  <ListGroupItem>Amount</ListGroupItem>
-                  <ListGroupItem>Percent of Budget</ListGroupItem>
-                </ListGroup>
-                <Card.Body>
-                  <Card.Link href="#">See All Food Transactions</Card.Link>
-                </Card.Body>
-              </Card>
-            </Col>
+            <BucketCards cardData={this.state.bucket} />
 
-            <Col>
+            {/* <Col>
               <Card style={{ width: "19rem" }}>
                 <Card.Img variant="top" src={carimage} />
                 <Card.Body>
@@ -113,7 +94,7 @@ export default class BudgetOverview extends Component {
                   <Card.Link href="#">See All Other Transactions</Card.Link>
                 </Card.Body>
               </Card>
-            </Col>
+            </Col> */}
           </Row>
           {/* Start of news Article */}
           <Row className="spacing">
