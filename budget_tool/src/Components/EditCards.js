@@ -56,9 +56,6 @@ export default class EditCards extends Component {
                 }
               ></input>
             </ListGroup>
-            <Card.Body>
-              <Card.Link href="#">See All Food Transactions</Card.Link>
-            </Card.Body>
           </Card>
         </Col>
       );

@@ -39,7 +39,7 @@ export default class BucketCards extends Component {
               </ListGroupItem>
             </ListGroup>
             <Card.Body>
-              <Card.Link href="#">See All Food Transactions</Card.Link>
+              <Card.Link href="#">See All {this.props.cardData[i].name} Transactions</Card.Link>
             </Card.Body>
           </Card>
         </Col>
