@@ -3,13 +3,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
+import logo from "../images/favicon.png"
+
 export default function Header() {
   return (
     <div className="header">
       <Navbar collapseOnSelect expand="lg" variant="dark">
         <Container>
           {/* <LinkContainer to="/" exact style={{ fontSize: 28 }}> */}
-          <img src="D:\Users\DZQ205\Desktop\Workspace\budget_tool\budget_tool\public\favicon.png" ></img>
+          <img src={logo} className="logo"></img>
           <Navbar.Brand href="/" exact="true" style={{ fontSize: 28 }}>
             Budget Tool
           </Navbar.Brand>
