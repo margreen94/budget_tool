@@ -18,7 +18,7 @@ import BucketCards from "./BucketCards";
 export default class BudgetOverview extends Component {
   state = {
     bucket: [],
-<<<<<<< HEAD
+    totalBudget: "",
     article1: "",
     article2: "",
     article3: "",
@@ -35,25 +35,18 @@ export default class BudgetOverview extends Component {
     console.log(this.state.articles[0].title)
   }
 
-=======
-    totalBudget: "",
-  };
->>>>>>> 13ca971f1f3f0314e15c67f8a49dbabcfc188dae
   componentDidMount() {
     axios({
       url: "/getByAccountId/25",
       method: "GET",
     }).then((response) => {
-<<<<<<< HEAD
       this.setState({ bucket: response.data });
-=======
       console.log(response.data);
       let total = 0;
       for (var i in response.data) {
         total += response.data[i].amountGoal;
       }
       this.setState({ bucket: response.data, totalBudget: total });
->>>>>>> 13ca971f1f3f0314e15c67f8a49dbabcfc188dae
     });
 
     axios({
@@ -70,11 +63,8 @@ export default class BudgetOverview extends Component {
     });
   }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 13ca971f1f3f0314e15c67f8a49dbabcfc188dae
   render() {
     console.log(this.state.articles);
     return (
