@@ -28,12 +28,10 @@ export default class AddTransaction extends Component {
   }
 
   postToApi(e) {
-    e.preventDefault();
     axios({
       url: "/addTransaction",
       method: "POST",
       data: {
-        id: 2,
         accountId: 25,
         date: this.state.date,
         displayName: this.state.vendor,
@@ -53,10 +51,10 @@ export default class AddTransaction extends Component {
         <input type="date" className="form-control" placeholder="Date" onChange={this.handleDateChange}></input>
         <h3>Vendor:</h3>
         <input type="text" className="form-control" placeholder="Vendor" onChange={this.handleVendorChange}></input>
-        <h3>Tag:</h3>
-            <div classNameName="dropdown">
+        <h3>Bucket:</h3>
+            <div className="dropdown">
               <select onChange={this.handleTagChange}>
-                <option value="" disabled selected>
+                <option value="" disabled defaultValue>
                   --Select Bucket--
                 </option>
                 <option value="Housing">Housing</option>
