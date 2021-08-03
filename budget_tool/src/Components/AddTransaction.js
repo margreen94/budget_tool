@@ -74,7 +74,7 @@ export default class AddTransaction extends Component {
                 <option value="Subscriptions">Subscriptions</option>
                 <option value="Auto">Auto</option>
                 <option value="Vacation">Vacation</option>
-                <option value="PersonalCare">PersonalCare</option>
+                <option value="PersonalCare">Personal Care</option>
                 <option value="Entertainment">Entertainment</option>
                 <option value="Food">Food</option>
                 <option value="Miscellaneous">Miscellaneous</option>
