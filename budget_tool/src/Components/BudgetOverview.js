@@ -50,15 +50,19 @@ export default class BudgetOverview extends Component {
     });
 
     axios({
-      url: "https://newsapi.org/v2/everything?q=\"personal%20finance\"&language=en&apiKey=e431dd0a8f96426ebc5c52a5a61302d0",
+      url: "https://newsapi.org/v2/everything?q=\personal%20finance\&language=en&apiKey=e431dd0a8f96426ebc5c52a5a61302d0&pagesize=100",
       method: "GET",
     }).then((response) => {
+      let max = response.data.articles.length -1
+      let min = 0
       //this.getArticles(response.data.articles)
-      this.setState({article1: response.data.articles[(Math.floor(Math.random() * (response.data.articles.length - 0 + 1)) + 0)],
-        article2: response.data.articles[(Math.floor(Math.random() * (response.data.articles.length - 5 + 1)) + 5)],
-        article3: response.data.articles[(Math.floor(Math.random() * (response.data.articles.length - 9 + 1)) + 9)],
-        article4: response.data.articles[(Math.floor(Math.random() * (response.data.articles.length - 4 + 1)) + 4)],
-        article5: response.data.articles[(Math.floor(Math.random() * (response.data.articles.length - 7 + 1)) + 7)],});
+      this.setState({
+        article1: response.data.articles[(Math.floor(Math.random() * (max - min*2) + min*2))],
+        article2: response.data.articles[(Math.floor(Math.random() * (max - min*2) + min*2))],
+        article3: response.data.articles[(Math.floor(Math.random() * (max - min*2)  + min*2))],
+        article4: response.data.articles[(Math.floor(Math.random() * (max/2 - min) + min))],
+        article5: response.data.articles[(Math.floor(Math.random() * (max/2 - min) + min))],
+      });
       //console.log(this.state.article1.title)
     });
   }
@@ -84,7 +88,7 @@ export default class BudgetOverview extends Component {
           {/* Start of news Article */}
           <Row className="spacing">
             <Card style={{ width: "15rem" }}>
-              {/* <Card.Img variant="top" src={this.state.article1.urlToImage} /> */}
+              <Card.Img variant="top" src={this.state.article1.urlToImage} />
               <Card.Body>
                 <Card.Title>{this.state.article1.title}</Card.Title>
                 <Card.Text>{this.state.article1.description}</Card.Text>
@@ -93,7 +97,7 @@ export default class BudgetOverview extends Component {
             </Card>
 
             <Card style={{ width: "15rem" }}>
-              {/* <Card.Img variant="top" src={this.state.article2.urlToImage} /> */}
+              <Card.Img variant="top" src={this.state.article2.urlToImage} />
               <Card.Body>
                 <Card.Title>{this.state.article2.title}</Card.Title>
                 <Card.Text>{this.state.article2.description}</Card.Text>
@@ -102,7 +106,7 @@ export default class BudgetOverview extends Component {
             </Card>
 
             <Card style={{ width: "15rem" }}>
-              {/* <Card.Img variant="top" src={this.state.article3.urlToImage} /> */}
+              <Card.Img variant="top" src={this.state.article3.urlToImage} />
               <Card.Body>
                 <Card.Title>{this.state.article3.title}</Card.Title>
                 <Card.Text>{this.state.article3.description}</Card.Text>
@@ -111,7 +115,7 @@ export default class BudgetOverview extends Component {
             </Card>
 
             <Card style={{ width: "15rem" }}>
-              {/* <Card.Img variant="top" src={this.state.article4.urlToImage} /> */}
+              <Card.Img variant="top" src={this.state.article4.urlToImage} />
               <Card.Body>
                 <Card.Title>{this.state.article4.title}</Card.Title>
                 <Card.Text>{this.state.article4.description}</Card.Text>
@@ -120,7 +124,7 @@ export default class BudgetOverview extends Component {
             </Card>
 
             <Card style={{ width: "15rem" }}>
-              {/* <Card.Img variant="top" src={this.state.article5.urlToImage} /> */}
+              <Card.Img variant="top" src={this.state.article5.urlToImage} />
               <Card.Body>
                 <Card.Title>{this.state.article5.title}</Card.Title>
                 <Card.Text>{this.state.article5.description}</Card.Text>
