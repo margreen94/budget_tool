@@ -56,7 +56,6 @@ export default class BudgetOverview extends Component {
       let max = response.data.articles.length -1
       let min = 0
       //this.getArticles(response.data.articles)
-      console.log(max)
       this.setState({
         article1: response.data.articles[(Math.floor(Math.random() * (max - min*2) + min*2))],
         article2: response.data.articles[(Math.floor(Math.random() * (max - min*2) + min*2))],
