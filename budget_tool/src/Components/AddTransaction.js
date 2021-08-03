@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Alert } from "react-bootstrap";
 import "bootstrap/js/dist/dropdown";
 import axios from "axios";
 import { Component } from "react";
@@ -7,12 +7,13 @@ import { Component } from "react";
 export default class AddTransaction extends Component {
   constructor(props) {
     super(props);
-    this.state = { date: "", vendor: "", tag: "", amount: "" };
+    this.state = { date: "", vendor: "", tag: "", amount: "", bucketData: [], showError: false, errorList: [] };
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleVendorChange = this.handleVendorChange.bind(this);
     this.handleTagChange = this.handleTagChange.bind(this);
     this.handleAmountChange = this.handleAmountChange.bind(this);
     this.postToApi = this.postToApi.bind(this);
+    this.checkOptionSelection = this.checkOptionSelection.bind(this);
   }
   handleDateChange(e) {
     this.setState({ date: e.target.value });
@@ -27,7 +28,7 @@ export default class AddTransaction extends Component {
     this.setState({ amount: e.target.value });
   }
 
-  postToApi(e) {
+  postToApi() {
     axios({
       url: "/addTransaction",
       method: "POST",
@@ -39,14 +40,74 @@ export default class AddTransaction extends Component {
         amount: this.state.amount,
       },
     });
+    
+  }
+
+  componentDidMount() {
+    axios({
+      url: "/getByAccountId/25",
+      method: "GET",
+    }).then((response) => {
+      this.setState({ bucketData: response.data});
+    });
   }
 
 
+  checkOptionSelection() {
+    var errors = []
+    if(this.state.date === "") {
+      errors.push("Date")
+    } 
+    if(this.state.vendor === "") {
+      errors.push("Description")
+    } 
+    if(this.state.tag === "") {
+      errors.push("Bucket")
+    } 
+    if(this.state.amount === "") {
+      errors.push("Amount")
+    } 
+
+    if(errors.length !== 0) {
+      this.setState({showError: true, errorList: errors})
+    }    
+    else {
+      this.postToApi();
+      window.location.reload(false);
+    }
+    
+  }
+  
+
+
     render() {
-        return (
+      var options = []
+      for(var i in this.state.bucketData) {
+
+        options.push(
+          <option key={i} value={this.state.bucketData[i].name}>{this.state.bucketData[i].name}</option>
+        )
+      }
+      
+      var errorMsg = ""
+      for(var j in this.state.errorList) {
+        if(errorMsg === ""){
+          errorMsg += this.state.errorList[j]
+        } else{
+          errorMsg += ", " + this.state.errorList[j]
+        }
+        
+      }
+
+      return (
             <div>
                 <Container>
                 <form>
+                <Alert show={this.state.showError} variant="danger" onClose={() => this.setState({showError: false})} dismissible>        
+          <Alert.Heading>Invalid Selection</Alert.Heading>        
+          <p>Please double check your input for the following fields:</p>  
+          <p>{errorMsg}</p>    
+        </Alert>
         <h3>Date:</h3>
         <input type="date" className="form-control" placeholder="Date" onChange={this.handleDateChange}></input>
         <h3>Description:</h3>
@@ -54,21 +115,13 @@ export default class AddTransaction extends Component {
         <h3>Bucket:</h3>
             <div className="dropdown">
               <select onChange={this.handleTagChange}>
-                <option value="" disabled defaultValue>
+                <option value="" defaultValue>
                   --Select Bucket--
                 </option>
-                <option value="Housing">Housing</option>
-                <option value="Utilities">Utilities</option>
-                <option value="Medical">Medical</option>
-                <option value="Subscriptions">Subscriptions</option>
-                <option value="Auto">Auto</option>
-                <option value="Vacation">Vacation</option>
-                <option value="PersonalCare">Personal Care</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Food">Food</option>
-                <option value="Miscellaneous">Miscellaneous</option>
+                {options}
               </select>
             </div>
+
             <h3>Amount:</h3>
 
             <div className="input-group mb-3">
@@ -76,20 +129,17 @@ export default class AddTransaction extends Component {
                 <span className="input-group-text">$</span>
               </div>
               <input
-                type="text"
+                type="number"
                 onChange={this.handleAmountChange}
                 className="form-control"
                 aria-label="Amount (to the nearest dollar)"
               ></input>
-              <div className="input-group-append">
-                <span className="input-group-text">.00</span>
-              </div>
             </div>
             <center>
               <button
                 type="button"
                 className="btn btn-success align-self-center"
-                onClick={this.postToApi}
+                onClick={this.checkOptionSelection}
               >
                 Add Transaction
               </button>
