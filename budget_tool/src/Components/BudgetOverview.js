@@ -10,17 +10,15 @@ import {
   Button,
 } from "react-bootstrap";
 import axios from "axios";
-import carimage from "../images/carimage.jpg";
-import food from "../images/food.jpg";
-import house from "../images/house.jpg";
-import other from "../images/other.jpg";
 
 import { Component } from "react";
 import PieChart from "./PieChart";
+import BucketCards from "./BucketCards";
 
 export default class BudgetOverview extends Component {
   state = {
     bucket: [],
+<<<<<<< HEAD
     article1: "",
     article2: "",
     article3: "",
@@ -37,12 +35,25 @@ export default class BudgetOverview extends Component {
     console.log(this.state.articles[0].title)
   }
 
+=======
+    totalBudget: "",
+  };
+>>>>>>> 13ca971f1f3f0314e15c67f8a49dbabcfc188dae
   componentDidMount() {
     axios({
       url: "/getByAccountId/25",
       method: "GET",
     }).then((response) => {
+<<<<<<< HEAD
       this.setState({ bucket: response.data });
+=======
+      console.log(response.data);
+      let total = 0;
+      for (var i in response.data) {
+        total += response.data[i].amountGoal;
+      }
+      this.setState({ bucket: response.data, totalBudget: total });
+>>>>>>> 13ca971f1f3f0314e15c67f8a49dbabcfc188dae
     });
 
     axios({
@@ -59,8 +70,11 @@ export default class BudgetOverview extends Component {
     });
   }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 13ca971f1f3f0314e15c67f8a49dbabcfc188dae
   render() {
     console.log(this.state.articles);
     return (
@@ -72,79 +86,11 @@ export default class BudgetOverview extends Component {
               <PieChart pieData={this.state.bucket} />
             </Col>
           </Row>
-          {/* Start of the buket cards */}
-          <Row className="spacing">
-            <Col>
-              <Card style={{ width: "19rem" }}>
-                <Card.Img variant="top" src={food} />
-                <Card.Body>
-                  <Card.Title>Food</Card.Title>
-                  <Card.Text>Overview of Food spending</Card.Text>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                  <ListGroupItem>Total Spent</ListGroupItem>
-                  <ListGroupItem>Amount</ListGroupItem>
-                  <ListGroupItem>Percent of Budget</ListGroupItem>
-                </ListGroup>
-                <Card.Body>
-                  <Card.Link href="#">See All Food Transactions</Card.Link>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col>
-              <Card style={{ width: "19rem" }}>
-                <Card.Img variant="top" src={carimage} />
-                <Card.Body>
-                  <Card.Title>Auto</Card.Title>
-                  <Card.Text>Overview of Auto spending</Card.Text>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                  <ListGroupItem>Total Spent</ListGroupItem>
-                  <ListGroupItem>Amount</ListGroupItem>
-                  <ListGroupItem>Percent of Budget</ListGroupItem>
-                </ListGroup>
-                <Card.Body>
-                  <Card.Link href="#">See All Auto Transactions</Card.Link>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col>
-              <Card style={{ width: "19rem" }}>
-                <Card.Img variant="top" src={house} />
-                <Card.Body>
-                  <Card.Title>Home</Card.Title>
-                  <Card.Text>Overview of Home spending</Card.Text>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                  <ListGroupItem>Total Spent</ListGroupItem>
-                  <ListGroupItem>Amount</ListGroupItem>
-                  <ListGroupItem>Percent of Budget</ListGroupItem>
-                </ListGroup>
-                <Card.Body>
-                  <Card.Link href="#">See All Home Transactions</Card.Link>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col>
-              <Card style={{ width: "19rem" }}>
-                <Card.Img variant="top" src={other} />
-                <Card.Body>
-                  <Card.Title>Other</Card.Title>
-                  <Card.Text>Overview of Other spending</Card.Text>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                  <ListGroupItem>Total Spent</ListGroupItem>
-                  <ListGroupItem>Amount</ListGroupItem>
-                  <ListGroupItem>Percent of Budget</ListGroupItem>
-                </ListGroup>
-                <Card.Body>
-                  <Card.Link href="#">See All Other Transactions</Card.Link>
-                </Card.Body>
-              </Card>
-            </Col>
+          <Row>
+            <h2>Total Budget Amount: {this.state.totalBudget}</h2>
           </Row>
+          {/* Start of the buket cards */}
+          <BucketCards cardData={this.state.bucket} />
           {/* Start of news Article */}
           <Row className="spacing">
             <Card style={{ width: "15rem" }}>

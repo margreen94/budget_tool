@@ -1,29 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
 
 import axios from "axios";
 
 import { Container } from "react-bootstrap";
-import { Card, ListGroupItem, ListGroup, Row, Col } from "react-bootstrap";
+import EditCards from "./EditCards";
 
-
-function editBucket(id,percent){
-  
-  axios({
-    url:"editBucket/" + id,
-    method: "PUT",
-    data: {
-      percent: percent
-    }
-  })
-}
-
-
-export default function BucketEdit() {
-  
-  return (
-    <div>
-      <Container>
-        <Row>
+export default class BucketEdit extends Component {
+  state = {
+    bucket: [],
+    totalBudget: "",
+  };
+  componentDidMount() {
+    axios({
+      url: "/getByAccountId/25",
+      method: "GET",
+    }).then((response) => {
+      console.log(response.data);
+      let total = 0;
+      for (var i in response.data) {
+        total += response.data[i].amountGoal;
+      }
+      this.setState({ bucket: response.data, totalBudget: total });
+    });
+  }
+  render() {
+    return (
+      <div>
+        <Container>
+          <EditCards editData={this.state.bucket} />
+          {/* <Row>
           <Col>
             <Card style={{ width: '19rem' }}>
               <Card.Body>
@@ -113,10 +118,9 @@ export default function BucketEdit() {
               </Card.Body>
             </Card>  
           </Col>
-        </Row>
-      </Container>
-    </div>
-  );
-
+        </Row> */}
+        </Container>
+      </div>
+    );
+  }
 }
-
