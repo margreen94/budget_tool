@@ -4,12 +4,13 @@ import "../App.css";
 import { Row } from "react-bootstrap";
 import { Card, ListGroupItem, ListGroup, Col } from "react-bootstrap";
 import { images } from "./images";
-
+let percentage
 export default class BucketCards extends Component {
   render() {
     const cards = [];
 
     for (var i in this.props.cardData) {
+      percentage = (this.props.cardData[i].amountSpent/this.props.cardData[i].amountGoal) * 100;
       cards.push(
         <Col md={4} key={i} className="spacing">
           <Card>
@@ -26,6 +27,11 @@ export default class BucketCards extends Component {
               </ListGroupItem>
               <ListGroupItem>
                 Budget Goal: {this.props.cardData[i].amountGoal}
+              </ListGroupItem>
+              <ListGroupItem>
+                <div className="progress-bar" role="progressbar" aria-valuenow={percentage} aria-valuemin="0" aria-valuemax="100" >
+                  {percentage.toFixed(2)}%
+                </div>
               </ListGroupItem>
               <ListGroupItem>
                 Amount Remaining:{" "}
