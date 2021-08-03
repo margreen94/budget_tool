@@ -9,6 +9,7 @@ export default function Header() {
       <Navbar collapseOnSelect expand="lg" variant="dark">
         <Container>
           {/* <LinkContainer to="/" exact style={{ fontSize: 28 }}> */}
+          <img src="D:\Users\DZQ205\Desktop\Workspace\budget_tool\budget_tool\public\favicon.png" ></img>
           <Navbar.Brand href="/" exact="true" style={{ fontSize: 28 }}>
             Budget Tool
           </Navbar.Brand>
