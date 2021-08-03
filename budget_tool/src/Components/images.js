@@ -1,5 +1,5 @@
 import Car from "../images/Car.jpg";
-import Food from "../images/Food.jpg";
+import Food from "../images/food.jpg";
 import General from "../images/General.jpg";
 import Rent from "../images/Rent.jpg";
 
