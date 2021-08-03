@@ -1,8 +1,8 @@
-// import React from "react";
 import axios from "axios";
 import { Table } from "react-bootstrap";
 
 import React, { Component } from "react";
+import "../App.css";
 
 export default class TransactionHistory extends Component {
   constructor(props) {
@@ -74,7 +74,7 @@ export default class TransactionHistory extends Component {
     }
 
     return (
-      <div>
+      <div className = "transTable">
         {/* <div>
           <button>Filter Transactions</button>
         </div> */}

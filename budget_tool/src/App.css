@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.transTable{
+  height: auto; 
+  overflow: scroll;
+}
 
 .footer {
   background-color: #50104A;
@@ -12,6 +16,7 @@
   bottom: 0;
   position: fixed;
   width: 100vw;
+  display: inline-block;
 }
 
 .spacing{
