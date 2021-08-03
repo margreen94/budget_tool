@@ -12,10 +12,14 @@ export default class TransactionHistory extends Component {
       filtered: [],
       date: "all",
       bucket: "allBuckets",
+      min: 0,
+      max: 1000000000000000000,
     };
     this.handleTagChange = this.handleTagChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
+    this.handleMin = this.handleMin.bind(this);
+    this.handleMax = this.handleMax.bind(this);
   }
 
   handleDateChange(e) {
@@ -25,30 +29,14 @@ export default class TransactionHistory extends Component {
       currMonth = "0" + currMonth;
     }
     this.setState({ date: e.target.value });
-    // var currYear = currDate.getFullYear();
-    // if (e.target.value === "all") {
-    //   this.componentDidMount();
-    // }
-    // if (e.target.value === "current") {
-    //   const result = this.state.AllTransactions.filter(
-    //     (obj) => obj["date"].slice(0, 2) === currMonth
-    //   );
-    //   this.setState({ filtered: result });
-    // } else {
-    //   const res = this.state.AllTransactions.filter(
-    //     (obj) => obj["date"].slice(0, 2) === e.target.value.slice(0, 2)
-    //   );
-    //   this.setState({ filtered: res });
-    // }
-
-    // this.setState({ date: currMonth });
   }
 
   handleFilter(e) {
     e.preventDefault();
     console.log(this.state.date);
     console.log(this.state.bucket);
-    console.log(this.state.filtered);
+    console.log(this.state.min);
+    console.log(this.state.max);
     console.log("made it");
 
     var currDate = new Date();
@@ -65,7 +53,6 @@ export default class TransactionHistory extends Component {
         result = this.state.AllTransactions.filter(
           (obj) => obj["date"].slice(0, 2) === currMonth
         );
-        // this.setState({ filtered: result });
       } else {
         result = this.state.AllTransactions.filter(
           (obj) => obj["date"].slice(0, 2) === this.state.date.slice(0, 2)
@@ -78,29 +65,52 @@ export default class TransactionHistory extends Component {
     });
   }
 
+  handleMin(e) {
+    this.setState({ min: e.target.value });
+  }
+
+  handleMax(e) {
+    this.setState({ max: e.target.value });
+  }
+
   checkTag() {
     console.log(this.state.filtered);
     if (this.state.bucket === "allBuckets") {
-      this.setState({ filtered: this.state.filtered });
+      this.setState({ filtered: this.state.filtered }, () => {
+        this.checkMin();
+      });
     } else {
       const result = this.state.filtered.filter(
         (obj) => obj["bucketTag"] === this.state.bucket
       );
-      this.setState({ filtered: result });
+      this.setState({ filtered: result }, () => {
+        this.checkMin();
+      });
     }
     console.log(this.state.filtered);
   }
-  handleTagChange(e) {
-    // console.log("yo");
-    // if (e.target.value === "allBuckets") {
-    //   this.setState({ filtered: this.state.AllTransactions });
-    // } else {
-    //   const result = this.state.AllTransactions.filter(
-    //     (obj) => obj["bucketTag"] === e.target.value
-    //   );
-    //   this.setState({ filtered: result });
-    // }
 
+  checkMin() {
+    console.log("hi");
+    var result = this.state.filtered.filter(
+      (obj) => obj["amount"] > this.state.min
+    );
+    console.log(result);
+    this.setState({ filtered: result }, () => {
+      this.checkMax();
+    });
+  }
+
+  checkMax() {
+    console.log("in max");
+    var result = this.state.filtered.filter(
+      (obj) => obj["amount"] < this.state.max
+    );
+    console.log(result);
+    this.setState({ filtered: result });
+  }
+
+  handleTagChange(e) {
     this.setState({ bucket: e.target.value });
   }
   componentDidMount() {
@@ -162,6 +172,12 @@ export default class TransactionHistory extends Component {
                 <option value="Food">Food</option>
               </select>
             </div>
+            <label>Minimum Amount Spent: </label>
+            <input type="number" onChange={this.handleMin}></input>
+            <br></br>
+            <label>Maximum Amount Spent: </label>
+            <input type="number" onChange={this.handleMax}></input>
+            <br></br>
             <button type="submit">Apply Filter</button>
           </form>
         </div>
