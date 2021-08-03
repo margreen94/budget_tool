@@ -145,14 +145,14 @@ export default class TransactionHistory extends Component {
       <div className="transTable">
         <h1>Transaction History</h1>
         <h3>Filter</h3>
-        <div>
+        <div style={{ display: "inline-block" }}>
           <form onSubmit={this.handleFilter}>
             <h6>Date</h6>
             <div className="dropdown">
               <select onChange={this.handleDateChange}>
-                {/* <option  value="" disabled>
+                <option value="" disabled>
                   --Select Month--
-                </option> */}
+                </option>
                 <option value="all">All Transactions</option>
                 <option value="current">Current Month</option>
                 <option value="0721">July 2021</option>
