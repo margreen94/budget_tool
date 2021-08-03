@@ -43,26 +43,17 @@ export default class AddTransaction extends Component {
     });
   }
 
-  render() {
-    return (
-      <div>
-        <Container>
-          <form>
-            <h3>Date:</h3>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Date"
-              onChange={this.handleDateChange}
-            ></input>
-            <h3>Vendor:</h3>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Vendor"
-              onChange={this.handleVendorChange}
-            ></input>
-            <h3>Bucket:</h3>
+
+    render() {
+        return (
+            <div>
+                <Container>
+                <form>
+        <h3>Date:</h3>
+        <input type="date" className="form-control" placeholder="Date" onChange={this.handleDateChange}></input>
+        <h3>Vendor:</h3>
+        <input type="text" className="form-control" placeholder="Vendor" onChange={this.handleVendorChange}></input>
+        <h3>Tag:</h3>
             <div classNameName="dropdown">
               <select onChange={this.handleTagChange}>
                 <option value="" disabled selected>
