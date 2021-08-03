@@ -49,8 +49,8 @@ export default class AddTransaction extends Component {
                 <form>
         <h3>Date:</h3>
         <input type="date" className="form-control" placeholder="Date" onChange={this.handleDateChange}></input>
-        <h3>Vendor:</h3>
-        <input type="text" className="form-control" placeholder="Vendor" onChange={this.handleVendorChange}></input>
+        <h3>Description:</h3>
+        <input type="text" className="form-control" placeholder="Description" onChange={this.handleVendorChange}></input>
         <h3>Bucket:</h3>
             <div className="dropdown">
               <select onChange={this.handleTagChange}>
