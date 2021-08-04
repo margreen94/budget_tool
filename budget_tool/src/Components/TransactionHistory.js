@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Table } from "react-bootstrap";
+import { Table, Accordion } from "react-bootstrap";
 
 import React, { Component } from "react";
 import "../App.css";
@@ -161,62 +161,65 @@ export default class TransactionHistory extends Component {
           Transaction History
         </h1>
         {/* <h1 style={{ textAlign: "center" }}>Transaction History</h1> */}
-        <div style={{ textAlign: "center", border: "solid black" }}>
-          <h3>Filter</h3>
-          <div>
-            <form onSubmit={this.handleFilter}>
+        <Accordion>
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Filter</Accordion.Header>
+            <Accordion.Body>
               <div>
-                <h6 style={{ float: "center" }}>Date</h6>
-                <div style={{ float: "center" }} className="dropdown">
-                  <select onChange={this.handleDateChange}>
-                    <option value="" disabled>
-                      --Select Month--
-                    </option>
-                    <option value="all">All Transactions</option>
-                    <option value="current">Current Month</option>
-                    <option value="0721">July 2021</option>
-                    <option value="0621">June 2021</option>
-                    <option value="0521">May 2021</option>
-                  </select>
-                </div>
-                <h6 style={{ float: "center" }}>Bucket</h6>
-                <div style={{ float: "center" }} className="dropdown">
-                  <select onChange={this.handleTagChange}>
-                    <option value="" disabled>
-                      --Select Bucket--
-                    </option>
-                    <option value="allBuckets">All Buckets</option>
-                    <option value="Housing">Housing</option>
-                    <option value="Medical">Medical</option>
-                    <option value="Subscriptions">Subscriptions</option>
-                    <option value="Auto">Auto</option>
-                    <option value="Vacation">Vacation</option>
-                    <option value="PersonalCare">Personal Care</option>
-                    <option value="Food">Food</option>
-                    <option value="Miscellaneous">Miscellaneous</option>
-                  </select>
-                </div>
+                <form onSubmit={this.handleFilter}>
+                  <div>
+                    <h6 style={{ float: "center" }}>Date</h6>
+                    <div style={{ float: "center" }} className="dropdown">
+                      <select onChange={this.handleDateChange}>
+                        <option value="" disabled>
+                          --Select Month--
+                        </option>
+                        <option value="all">All Transactions</option>
+                        <option value="current">Current Month</option>
+                        <option value="0721">July 2021</option>
+                        <option value="0621">June 2021</option>
+                        <option value="0521">May 2021</option>
+                      </select>
+                    </div>
+                    <h6 style={{ float: "center" }}>Bucket</h6>
+                    <div style={{ float: "center" }} className="dropdown">
+                      <select onChange={this.handleTagChange}>
+                        <option value="" disabled>
+                          --Select Bucket--
+                        </option>
+                        <option value="allBuckets">All Buckets</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Subscriptions">Subscriptions</option>
+                        <option value="Auto">Auto</option>
+                        <option value="Vacation">Vacation</option>
+                        <option value="PersonalCare">Personal Care</option>
+                        <option value="Food">Food</option>
+                        <option value="Miscellaneous">Miscellaneous</option>
+                      </select>
+                    </div>
+                  </div>
+                  <br></br>
+                  <br></br>
+                  <div style={{ width: 300 }}>
+                    <Typography id="range-slider" gutterBottom>
+                      Amount Spent Range:
+                    </Typography>
+                    <Slider
+                      value={[this.state.min, this.state.max]}
+                      onChange={this.handleRangeChange}
+                      valueLabelDisplay="auto"
+                      aria-labelledby="range-slider"
+                      max={this.state.realMax}
+                    />
+                  </div>
+                  <br></br>
+                  <button type="submit">Apply Filter</button>
+                </form>
               </div>
-              <br></br>
-              <br></br>
-              <div style={{ width: 300 }}>
-                <Typography id="range-slider" gutterBottom>
-                  Amount Spent Range:
-                </Typography>
-                <Slider
-                  value={[this.state.min, this.state.max]}
-                  onChange={this.handleRangeChange}
-                  valueLabelDisplay="auto"
-                  aria-labelledby="range-slider"
-                  max={this.state.realMax}
-                />
-              </div>
-              <br></br>
-              <button type="submit">Apply Filter</button>
-            </form>
-          </div>
-        </div>
-        <br></br>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
         <br></br>
         <Table striped bordered hover>
           <thead>
