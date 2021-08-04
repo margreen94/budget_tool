@@ -30,7 +30,6 @@ export default class PieChart extends Component {
     };
     //options for the pie chart
     const percentage = (tooltipItem, data) => {
-      
       return tooltipItem.label + ": " + tooltipItem.parsed + "%";
     };
     const options = {

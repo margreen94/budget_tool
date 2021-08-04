@@ -1,15 +1,15 @@
 .header {
-  background-color: #50104A;
+  background-color: #50104a;
   text-align: center;
 }
 
-.transTable{
-  height: auto; 
+.transTable {
+  height: auto;
   overflow: scroll;
 }
 
 .footer {
-  background-color: #50104A;
+  background-color: #50104a;
   color: white;
   padding: 10px;
   text-align: center;
@@ -19,12 +19,14 @@
   display: inline-block;
 }
 
-.spacing{
-  padding-top:1em;
-  padding-bottom:1em;
+.spacing {
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
-
-.logo{
+.float-right {
+  float: right;
+}
+.logo {
   width: 50px;
-  padding-right: .5em;
+  padding-right: 0.5em;
 }

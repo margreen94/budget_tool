@@ -3,19 +3,11 @@ import Utilities from "../images/Utilities.jpg";
 import Medical from "../images/Medical.jpg";
 import Subscriptions from "../images/Subscriptions.jpg";
 import Auto from "../images/Car.jpg";
-import Vacation from "../images/Vacation.jpg"
+import Vacation from "../images/Vacation.jpg";
 import PersonalCare from "../images/PersonalCare.jpg";
 import Entertainment from "../images/Entertainment.jpg";
 import Food from "../images/Food.jpg";
 import Miscellaneous from "../images/Miscellaneous.jpg";
-
-
-
-
-
-
-
-
 
 export const images = {
   Housing: Housing,
@@ -27,5 +19,5 @@ export const images = {
   PersonalCare: PersonalCare,
   Entertainment: Entertainment,
   Food: Food,
-  Miscellaneous: Miscellaneous
+  Miscellaneous: Miscellaneous,
 };
