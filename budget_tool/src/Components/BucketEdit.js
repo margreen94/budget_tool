@@ -139,6 +139,9 @@ export default class BucketEdit extends Component {
 
     return (
       <div>
+        <h1 style={{ textAlign: "center" }} class="display-4">
+          Edit Buckets
+        </h1>
         <Container>
           <Row className="justify-content-md-center spacing">
             <InputGroup size="lg">

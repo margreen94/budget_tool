@@ -75,11 +75,12 @@ export default class BudgetOverview extends Component {
             </Col>
           </Row>
           <Row>
-            <h2>Total Budget Amount: {this.state.totalBudget}</h2>
+            <h2>Total Budget Amount: ${this.state.totalBudget}</h2>
           </Row>
           {/* Start of the buket cards */}
           <BucketCards cardData={this.state.bucket} />
           {/* Start of news Article */}
+          <h2>Some helpful financial articles:</h2>
           <Row className="spacing">
             <Card style={{ width: "15rem" }}>
               <Card.Img variant="top" src={this.state.article1.urlToImage} />

@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-import logo from "../images/favicon.png"
+import logo from "../images/AllyLogo.jpg";
 
 export default function Header() {
   return (
@@ -25,8 +25,8 @@ export default function Header() {
               <LinkContainer to="/" exact={true}>
                 <Nav.Link>Budget Overview</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/BucketEdit">
-                <Nav.Link>Bucket Edit</Nav.Link>
+              <LinkContainer to="/EditBuckets">
+                <Nav.Link>Edit Buckets</Nav.Link>
               </LinkContainer>
               <LinkContainer to="TransactionHistory">
                 <Nav.Link>Transaction History</Nav.Link>
