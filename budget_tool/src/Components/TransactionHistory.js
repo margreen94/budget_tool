@@ -4,6 +4,8 @@ import { Table } from "react-bootstrap";
 import React, { Component } from "react";
 import "../App.css";
 
+import { Typography, Slider } from "@material-ui/core";
+
 export default class TransactionHistory extends Component {
   constructor(props) {
     super(props);
@@ -13,13 +15,13 @@ export default class TransactionHistory extends Component {
       date: "all",
       bucket: "allBuckets",
       min: 0,
-      max: 1000000000000000000,
+      max: 0,
+      realMax: 0,
     };
     this.handleTagChange = this.handleTagChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
-    this.handleMin = this.handleMin.bind(this);
-    this.handleMax = this.handleMax.bind(this);
+    this.handleRangeChange = this.handleRangeChange.bind(this);
   }
 
   handleDateChange(e) {
@@ -65,12 +67,17 @@ export default class TransactionHistory extends Component {
     });
   }
 
-  handleMin(e) {
-    this.setState({ min: e.target.value });
+  getMax() {
+    var map1 = this.state.AllTransactions.map((x) => x["amount"]);
+    this.setState({
+      realMax: Math.round(Math.max(...map1)),
+      max: Math.round(Math.max(...map1)),
+    });
   }
 
-  handleMax(e) {
-    this.setState({ max: e.target.value });
+  handleRangeChange(e, newValue) {
+    this.setState({ min: newValue[0] });
+    this.setState({ max: newValue[1] });
   }
 
   checkTag() {
@@ -118,17 +125,24 @@ export default class TransactionHistory extends Component {
     axios({
       url: "/getTransaction",
       method: "GET",
-    }).then((response) => {
-      this.setState({
-        AllTransactions: response.data,
-        filtered: response.data,
+    })
+      .then((response) => {
+        this.setState({
+          AllTransactions: response.data.sort(function (a, b) {
+            return new Date(b.date) - new Date(a.date);
+          }),
+          filtered: response.data,
+        });
+      })
+      .then(() => {
+        this.getMax();
       });
-    });
   }
 
   render() {
     // <div id="container"></div>;
-
+    console.log(this.state.AllTransactions);
+    console.log(this.state.filtered);
     var bodyRows = [];
     for (var i = 0; i < this.state.filtered.length; i++) {
       bodyRows.push(
@@ -143,44 +157,67 @@ export default class TransactionHistory extends Component {
 
     return (
       <div className="transTable">
-        <h1>Transaction History</h1>
-        <h3>Filter</h3>
-        <div style={{ display: "inline-block" }}>
-          <form onSubmit={this.handleFilter}>
-            <h6>Date</h6>
-            <div className="dropdown">
-              <select onChange={this.handleDateChange}>
-                <option value="" disabled>
-                  --Select Month--
-                </option>
-                <option value="all">All Transactions</option>
-                <option value="current">Current Month</option>
-                <option value="0721">July 2021</option>
-                <option value="0621">June 2021</option>
-                <option value="0521">May 2021</option>
-              </select>
-            </div>
-            <h6>Bucket</h6>
-            <div className="dropdown">
-              <select onChange={this.handleTagChange}>
-                <option value="" disabled>
-                  --Select Bucket--
-                </option>
-                <option value="allBuckets">All Buckets</option>
-                <option value="Car">Car</option>
-                <option value="General">General</option>
-                <option value="Food">Food</option>
-              </select>
-            </div>
-            <label>Minimum Amount Spent: </label>
-            <input type="number" onChange={this.handleMin}></input>
-            <br></br>
-            <label>Maximum Amount Spent: </label>
-            <input type="number" onChange={this.handleMax}></input>
-            <br></br>
-            <button type="submit">Apply Filter</button>
-          </form>
+        <h1 style={{ textAlign: "center" }} class="display-4">
+          Transaction History
+        </h1>
+        {/* <h1 style={{ textAlign: "center" }}>Transaction History</h1> */}
+        <div style={{ textAlign: "center", border: "solid black" }}>
+          <h3>Filter</h3>
+          <div>
+            <form onSubmit={this.handleFilter}>
+              <div>
+                <h6 style={{ float: "center" }}>Date</h6>
+                <div style={{ float: "center" }} className="dropdown">
+                  <select onChange={this.handleDateChange}>
+                    <option value="" disabled>
+                      --Select Month--
+                    </option>
+                    <option value="all">All Transactions</option>
+                    <option value="current">Current Month</option>
+                    <option value="0721">July 2021</option>
+                    <option value="0621">June 2021</option>
+                    <option value="0521">May 2021</option>
+                  </select>
+                </div>
+                <h6 style={{ float: "center" }}>Bucket</h6>
+                <div style={{ float: "center" }} className="dropdown">
+                  <select onChange={this.handleTagChange}>
+                    <option value="" disabled>
+                      --Select Bucket--
+                    </option>
+                    <option value="allBuckets">All Buckets</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Subscriptions">Subscriptions</option>
+                    <option value="Auto">Auto</option>
+                    <option value="Vacation">Vacation</option>
+                    <option value="PersonalCare">Personal Care</option>
+                    <option value="Food">Food</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
+                  </select>
+                </div>
+              </div>
+              <br></br>
+              <br></br>
+              <div style={{ width: 300 }}>
+                <Typography id="range-slider" gutterBottom>
+                  Amount Spent Range:
+                </Typography>
+                <Slider
+                  value={[this.state.min, this.state.max]}
+                  onChange={this.handleRangeChange}
+                  valueLabelDisplay="auto"
+                  aria-labelledby="range-slider"
+                  max={this.state.realMax}
+                />
+              </div>
+              <br></br>
+              <button type="submit">Apply Filter</button>
+            </form>
+          </div>
         </div>
+        <br></br>
+        <br></br>
         <Table striped bordered hover>
           <thead>
             <th>
