@@ -9,6 +9,8 @@ import {
   InputGroup,
   FormControl,
   Row,
+  Modal,
+  Alert
 } from "react-bootstrap";
 import EditCards from "./EditCards";
 
@@ -20,11 +22,16 @@ export default class BucketEdit extends Component {
       editedIncome: 0,
       editedBuckets: [],
       totalBudget: "",
+      showAddBucket: false,
+      newBucketName: "",
+      showAddError: false
     };
 
     this.addToEditedBuckets = this.addToEditedBuckets.bind(this);
     this.editBucketsAPI = this.editBucketsAPI.bind(this);
     this.incomeChange = this.incomeChange.bind(this);
+    this.addNewBucket = this.addNewBucket.bind(this);
+    this.handleNewBucketName = this.handleNewBucketName.bind(this);
   }
 
   componentDidMount() {
@@ -85,6 +92,29 @@ export default class BucketEdit extends Component {
     });
     window.location.reload(false);
   }
+
+  addNewBucket() {
+    if(this.state.newBucketName !== ""){
+      axios({
+        url: "/addNewBucket",
+        method: "POST",
+        data: {name: this.state.newBucketName,
+               percent: 0,
+               accountId: 25,
+               amountGoal: 0,
+               amountSpent: 0}
+      })
+      window.location.reload(false);
+    } else {
+      this.setState({showAddError: true})
+    }
+
+  }
+
+  handleNewBucketName(e) {
+    this.setState({newBucketName: e.target.value})
+  }
+
   render() {
     return (
       <div>
@@ -117,10 +147,50 @@ export default class BucketEdit extends Component {
           >
             Submit
           </Button>
-          <Button type="submit" onClick={this.newSpendingMonth}>
+          <Button  style={{ marginRight: "1em" }} type="submit" onClick={this.newSpendingMonth}>
             New Month
           </Button>
+          <Button type="submit" onClick={() => {this.setState({showAddBucket: true})}}>
+            Add Bucket
+          </Button>
         </Container>
+
+
+
+
+        <Modal 
+        show={this.state.showAddBucket}
+        onHide={() => this.setState({showAddBucket: false, newBucketName: ""})}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Add New Bucket
+        </Modal.Title>
+      </Modal.Header>
+      
+      <Alert show={this.state.showAddError} variant="danger" onClose={() => this.setState({showAddError: false})} dismissible>        
+        <Alert.Heading>Invalid Selection</Alert.Heading>        
+          <p>Please select a bucket name</p> 
+      </Alert>
+      <Modal.Body>
+        
+        <h4>Bucket Name:</h4>
+        <form onChange={this.handleNewBucketName}>
+          <input type="radio" id="Medical" name="newBucket" value="Medical"></input>
+          <label for="Medical"> Medical</label><br></br>
+          <input type="radio" id="Subscriptions" name="newBucket" value="Subscriptions"></input>
+          <label for="Subscriptions"> Subscriptions</label><br></br>
+          <input type="radio" id="Entertainment" name="newBucket" value="Entertainment"></input>
+          <label for="Entertainment"> Entertainment</label><br></br>
+        </form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={this.addNewBucket}>Submit</Button>
+      </Modal.Footer>
+    </Modal>
       </div>
     );
   }
