@@ -2,26 +2,33 @@ import React, { Component } from "react";
 import "../App.css";
 
 import { Row } from "react-bootstrap";
-import { Card, ListGroupItem, ListGroup, Col, CloseButton, Button, Modal } from "react-bootstrap";
+import {
+  Card,
+  ListGroupItem,
+  ListGroup,
+  Col,
+  CloseButton,
+  Button,
+  Modal,
+} from "react-bootstrap";
 import axios from "axios";
 
 export default class EditCards extends Component {
-
-  constructor(props){
-    super(props)
-    this.setEditedBuckets = this.setEditedBuckets.bind(this)
-    this.deleteBucket = this.deleteBucket.bind(this)
-    this.showConfirmDelete = this.showConfirmDelete.bind(this)
-    this.state = {showConfirmDelete: false, deleteIndex: -1}
+  constructor(props) {
+    super(props);
+    this.setEditedBuckets = this.setEditedBuckets.bind(this);
+    this.deleteBucket = this.deleteBucket.bind(this);
+    this.showConfirmDelete = this.showConfirmDelete.bind(this);
+    this.state = { showConfirmDelete: false, deleteIndex: -1 };
   }
 
-  setEditedBuckets(e){
-    this.props.addFunc({id: e.target.id, percent: e.target.value })
+  setEditedBuckets(e) {
+    this.props.addFunc({ id: e.target.id, percent: e.target.value });
   }
 
   deleteBucket(e) {
-    console.log(this.state.deleteIndex)
-    var i = this.state.deleteIndex
+    console.log(this.state.deleteIndex);
+    var i = this.state.deleteIndex;
     axios({
       url: "/deleteBucket",
       method: "DELETE",
@@ -32,17 +39,15 @@ export default class EditCards extends Component {
         // percent: this.props.percent,
         // amountSpent: this.props.amountSpent,
         // amountGoal: this.props.amountGoal
-      }
-    })
+      },
+    });
     window.location.reload(false);
   }
 
   showConfirmDelete(e) {
-    console.log(e.target.value)
-    this.setState({showConfirmDelete: true, deleteIndex: e.target.value})
+    console.log(e.target.value);
+    this.setState({ showConfirmDelete: true, deleteIndex: e.target.value });
   }
-
-
 
   render() {
     const cards = [];
@@ -52,13 +57,15 @@ export default class EditCards extends Component {
         <Col md={4} key={i} className="spacing">
           <Card>
             <Card.Body>
-
-            <CloseButton id={i} value={i} onClick={this.showConfirmDelete}/>
+              <CloseButton
+                className="float-right"
+                id={i}
+                value={i}
+                onClick={this.showConfirmDelete}
+              />
 
               <Card.Title>{this.props.editData[i].name}</Card.Title>
-              <Card.Text>
-                Overview of {this.props.editData[i].name} spending
-              </Card.Text>
+              <Card.Text>Overview of {this.props.editData[i].name} spending</Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush">
               <ListGroupItem>
@@ -78,36 +85,32 @@ export default class EditCards extends Component {
               ></input>
             </ListGroup>
           </Card>
-
-
         </Col>
       );
     }
-    return <Row className="spacing">{cards}
+    return (
+      <Row className="spacing">
+        {cards}
 
-              <Modal 
-        show={this.state.showConfirmDelete}
-        onHide={() => this.setState({showConfirmDelete: false})}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Add New Bucket
-        </Modal.Title>
-      </Modal.Header>
+        <Modal
+          show={this.state.showConfirmDelete}
+          onHide={() => this.setState({ showConfirmDelete: false })}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">Add New Bucket</Modal.Title>
+          </Modal.Header>
 
-      <Modal.Body>
-        
-      <p>Are you sure you want to delete this bucket?</p>
-
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={this.deleteBucket}>Yes</Button>
-      </Modal.Footer>
-    </Modal>
-    
-    </Row>;
+          <Modal.Body>
+            <p>Are you sure you want to delete this bucket?</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.deleteBucket}>Yes</Button>
+          </Modal.Footer>
+        </Modal>
+      </Row>
+    );
   }
 }
