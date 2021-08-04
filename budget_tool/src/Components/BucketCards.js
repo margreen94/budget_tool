@@ -14,7 +14,7 @@ export default class BucketCards extends Component {
       cards.push(
         <Col md={4} key={i} className="spacing">
           <Card>
-            <Card.Img variant="top" src={images[this.props.cardData[i].name]} />
+            <Card.Img variant="top" src={images[(this.props.cardData[i].name).replace(/\s+/g, '')]} />
             <Card.Body>
               <Card.Title>{this.props.cardData[i].name}</Card.Title>
               <Card.Text>
