@@ -41,7 +41,6 @@ export default class BudgetOverview extends Component {
       method: "GET",
     }).then((response) => {
       this.setState({ bucket: response.data });
-      console.log(response.data);
       let total = 0;
       for (var i in response.data) {
         total += response.data[i].amountGoal;
@@ -70,7 +69,6 @@ export default class BudgetOverview extends Component {
 
 
   render() {
-    console.log(this.state.articles);
     return (
       <div>
         <Container>

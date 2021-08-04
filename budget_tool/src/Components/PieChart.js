@@ -12,7 +12,6 @@ export default class PieChart extends Component {
       percentData.push(this.props.pieData[i].percent);
       let colorRando = "#" + Math.floor(Math.random() * 16777215).toString(16);
       colorData.push(colorRando);
-      console.log(colorRando);
     }
 
     const data = {
@@ -31,8 +30,7 @@ export default class PieChart extends Component {
     };
     //options for the pie chart
     const percentage = (tooltipItem, data) => {
-      console.log("data" + data);
-      //   console.log(tooltipItem);
+      
       return tooltipItem.label + ": " + tooltipItem.parsed + "%";
     };
     const options = {
