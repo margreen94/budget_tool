@@ -116,6 +116,27 @@ export default class BucketEdit extends Component {
   }
 
   render() {
+    var categories = ["Housing", "Utilities", "Medical", "Subscriptions", "Auto", "Vacation", "Personal Care", "Entertainment", "Food", "Miscellaneous"]
+
+    for(var i in this.state.bucket) {
+      var index = categories.indexOf(this.state.bucket[i].name);
+      if (index !== -1) {
+        categories.splice(index, 1);
+      }
+    }
+
+    var addList = []
+    for (var j in categories) {
+      var tag = categories[j]
+      addList.push(
+        <div>
+        <input type="radio" id={tag} name="newBucket" value={tag}></input>
+        <label for={tag}>{tag}</label><br></br>
+        </div>
+      )
+    }
+
+
     return (
       <div>
         <Container>
@@ -179,12 +200,7 @@ export default class BucketEdit extends Component {
         
         <h4>Bucket Name:</h4>
         <form onChange={this.handleNewBucketName}>
-          <input type="radio" id="Medical" name="newBucket" value="Medical"></input>
-          <label for="Medical"> Medical</label><br></br>
-          <input type="radio" id="Subscriptions" name="newBucket" value="Subscriptions"></input>
-          <label for="Subscriptions"> Subscriptions</label><br></br>
-          <input type="radio" id="Entertainment" name="newBucket" value="Entertainment"></input>
-          <label for="Entertainment"> Entertainment</label><br></br>
+          {addList}
         </form>
       </Modal.Body>
       <Modal.Footer>
