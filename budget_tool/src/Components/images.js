@@ -6,7 +6,7 @@ import Auto from "../images/Car.jpg";
 import Vacation from "../images/Vacation.jpg";
 import PersonalCare from "../images/PersonalCare.jpg";
 import Entertainment from "../images/Entertainment.jpg";
-import Food from "../images/Food.jpg";
+import Food from "../images/food.jpg";
 import Miscellaneous from "../images/Miscellaneous.jpg";
 
 export const images = {

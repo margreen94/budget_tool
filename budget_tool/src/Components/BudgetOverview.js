@@ -28,6 +28,15 @@ export default class BudgetOverview extends Component {
     console.log(this.state.articles[0].title);
   }
 
+  removeTags(str) {
+    if ((str===null) || (str===''))
+    return false;
+    else
+    str = "" + str
+    str = str.toString();
+    return str.replace( /(<([^>]+)>)/ig, '');
+ }
+
   componentDidMount() {
     axios({
       url: "/getByAccountId/25",
@@ -66,7 +75,7 @@ export default class BudgetOverview extends Component {
 
   render() {
     return (
-      <div className="footerFix">
+      <div>
         <Container className="spacing">
           {/* Pie chart */}
           <Row className="spacing">
@@ -86,10 +95,10 @@ export default class BudgetOverview extends Component {
               <Card.Img variant="top" src={this.state.article1.urlToImage} />
               <Card.Body>
                 <Card.Title>{this.state.article1.title}</Card.Title>
-                <Card.Text>{this.state.article1.description}</Card.Text>
+                <Card.Text>{this.removeTags(this.state.article1.description)}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article1.url, "_blank")}
-                  className="applyButton"
+                  variant="primary"
                 >
                   Go to Article
                 </Button>
@@ -100,10 +109,10 @@ export default class BudgetOverview extends Component {
               <Card.Img variant="top" src={this.state.article2.urlToImage} />
               <Card.Body>
                 <Card.Title>{this.state.article2.title}</Card.Title>
-                <Card.Text>{this.state.article2.description}</Card.Text>
+                <Card.Text>{this.removeTags(this.state.article2.description)}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article2.url, "_blank")}
-                  className="applyButton"
+                  variant="primary"
                 >
                   Go to Article
                 </Button>
@@ -114,10 +123,10 @@ export default class BudgetOverview extends Component {
               <Card.Img variant="top" src={this.state.article3.urlToImage} />
               <Card.Body>
                 <Card.Title>{this.state.article3.title}</Card.Title>
-                <Card.Text>{this.state.article3.description}</Card.Text>
+                <Card.Text>{this.removeTags(this.state.article3.description)}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article3.url, "_blank")}
-                  className="applyButton"
+                  variant="primary"
                 >
                   Go to Article
                 </Button>
@@ -128,10 +137,10 @@ export default class BudgetOverview extends Component {
               <Card.Img variant="top" src={this.state.article4.urlToImage} />
               <Card.Body>
                 <Card.Title>{this.state.article4.title}</Card.Title>
-                <Card.Text>{this.state.article4.description}</Card.Text>
+                <Card.Text>{this.removeTags(this.state.article4.description)}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article4.url, "_blank")}
-                  className="applyButton"
+                  variant="primary"
                 >
                   Go to Article
                 </Button>
@@ -142,10 +151,10 @@ export default class BudgetOverview extends Component {
               <Card.Img variant="top" src={this.state.article5.urlToImage} />
               <Card.Body>
                 <Card.Title>{this.state.article5.title}</Card.Title>
-                <Card.Text>{this.state.article5.description}</Card.Text>
+                <Card.Text>{this.removeTags(this.state.article5.description)}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article5.url, "_blank")}
-                  className="applyButton"
+                  variant="primary"
                 >
                   Go to Article
                 </Button>
