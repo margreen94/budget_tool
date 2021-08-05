@@ -6,7 +6,7 @@
   background-color: #50104a !important ;
   color: white;
   border-color: #50104a !important;
-  box-shadow: 0 0 0 0.25rem rgb(170 34 157 / 50%);
+  box-shadow: 0 0 0 0.25rem rgb(170 34 157 / 50%) !important;
 }
 .footer {
   background-color: #50104a;
