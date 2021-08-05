@@ -34,12 +34,15 @@ export default class TransactionHistory extends Component {
   }
 
   handleFilter(e) {
-    e.preventDefault();
-    console.log(this.state.date);
-    console.log(this.state.bucket);
-    console.log(this.state.min);
-    console.log(this.state.max);
-    console.log("made it");
+    if(e !== undefined){
+      e.preventDefault();
+    }
+    
+    // console.log(this.state.date);
+    // console.log(this.state.bucket);
+    // console.log(this.state.min);
+    // console.log(this.state.max);
+    // console.log("made it");
 
     var currDate = new Date();
     var currMonth = (currDate.getMonth() + 1).toString();
@@ -81,7 +84,7 @@ export default class TransactionHistory extends Component {
   }
 
   checkTag() {
-    console.log(this.state.filtered);
+    // console.log(this.state.filtered);
     if (this.state.bucket === "allBuckets") {
       this.setState({ filtered: this.state.filtered }, () => {
         this.checkMin();
@@ -94,26 +97,26 @@ export default class TransactionHistory extends Component {
         this.checkMin();
       });
     }
-    console.log(this.state.filtered);
+    // console.log(this.state.filtered);
   }
 
   checkMin() {
-    console.log("hi");
+    // console.log("hi");
     var result = this.state.filtered.filter(
       (obj) => obj["amount"] > this.state.min
     );
-    console.log(result);
+    // console.log(result);
     this.setState({ filtered: result }, () => {
       this.checkMax();
     });
   }
 
   checkMax() {
-    console.log("in max");
+    // console.log("in max");
     var result = this.state.filtered.filter(
       (obj) => obj["amount"] < this.state.max
     );
-    console.log(result);
+    // console.log(result);
     this.setState({ filtered: result });
   }
 
@@ -127,22 +130,36 @@ export default class TransactionHistory extends Component {
       method: "GET",
     })
       .then((response) => {
+        //Get GET params (filter)
+        //Maybe an if not blank/defined check
+        let params = new URLSearchParams(window.location.search);
+        let filterTag = params.get('filter')
+        let date = "current"
+        // console.log(filterTag)
+        if(filterTag === null){
+          filterTag = "allBuckets"
+          date = "all"
+        }
+        // console.log(filterTag)
         this.setState({
           AllTransactions: response.data.sort(function (a, b) {
             return new Date(b.date) - new Date(a.date);
           }),
           filtered: response.data,
+          bucket: filterTag,
+          // date: date
         });
       })
       .then(() => {
         this.getMax();
+        this.handleFilter();
       });
   }
 
   render() {
     // <div id="container"></div>;
-    console.log(this.state.AllTransactions);
-    console.log(this.state.filtered);
+    // console.log(this.state.AllTransactions);
+    // console.log(this.state.filtered);
     var bodyRows = [];
     for (var i = 0; i < this.state.filtered.length; i++) {
       bodyRows.push(
