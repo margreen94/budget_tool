@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import axios from "axios";
 
@@ -10,7 +11,7 @@ import {
   FormControl,
   Row,
   Modal,
-  Alert
+  Alert,
 } from "react-bootstrap";
 import EditCards from "./EditCards";
 
@@ -26,6 +27,7 @@ export default class BucketEdit extends Component {
       newBucketName: "",
       showAddError: false,
       budgetTotal:0
+
     };
 
     this.addToEditedBuckets = this.addToEditedBuckets.bind(this);
@@ -122,122 +124,144 @@ export default class BucketEdit extends Component {
   }
 
   addNewBucket() {
-    if(this.state.newBucketName !== ""){
+    if (this.state.newBucketName !== "") {
       axios({
         url: "/addNewBucket",
         method: "POST",
-        data: {name: this.state.newBucketName,
-               percent: 0,
-               accountId: 25,
-               amountGoal: 0,
-               amountSpent: 0}
-      })
+        data: {
+          name: this.state.newBucketName,
+          percent: 0,
+          accountId: 25,
+          amountGoal: 0,
+          amountSpent: 0,
+        },
+      });
       window.location.reload(false);
     } else {
-      this.setState({showAddError: true})
+      this.setState({ showAddError: true });
     }
-
   }
 
   handleNewBucketName(e) {
-    this.setState({newBucketName: e.target.value})
+    this.setState({ newBucketName: e.target.value });
   }
 
   render() {
-    var categories = ["Housing", "Utilities", "Medical", "Subscriptions", "Auto", "Vacation", "Personal Care", "Entertainment", "Food", "Miscellaneous"]
+    var categories = [
+      "Housing",
+      "Utilities",
+      "Medical",
+      "Subscriptions",
+      "Auto",
+      "Vacation",
+      "Personal Care",
+      "Entertainment",
+      "Food",
+      "Miscellaneous",
+    ];
 
-    for(var i in this.state.bucket) {
+    for (var i in this.state.bucket) {
       var index = categories.indexOf(this.state.bucket[i].name);
       if (index !== -1) {
         categories.splice(index, 1);
       }
     }
 
-    var addList = []
+    var addList = [];
     for (var j in categories) {
-      var tag = categories[j]
+      var tag = categories[j];
       addList.push(
         <div>
-        <input type="radio" id={tag} name="newBucket" value={tag}></input>
-        <label for={tag}>{tag}</label><br></br>
+          <input type="radio" id={tag} name="newBucket" value={tag}></input>
+          <label for={tag}>{tag}</label>
+          <br></br>
         </div>
-      )
+      );
     }
 
-
     return (
-      <div>
-        <h1 style={{ textAlign: "center" }} class="display-4">
-          Edit Buckets
-        </h1>
-        <Container>
-          <Row className="justify-content-md-center spacing">
-            <InputGroup size="lg">
-              <InputGroup.Text id="inputGroup-sizing-lg">
-                Estimated Montly Income:{" "}
-              </InputGroup.Text>
-              <FormControl
-                aria-label="Large"
-                aria-describedby="inputGroup-sizing-sm"
-                type="text"
-                id="TotalAmount"
-                onChange={this.incomeChange}
-              />
-            </InputGroup>
-          </Row>
-        </Container>
-        <Container>
-          <EditCards
-            editData={this.state.bucket}
-            addFunc={this.addToEditedBuckets}
-          />
-          <Button
-            style={{ marginRight: "1em" }}
-            type="submit"
-            value="Submit"
-            onClick={this.editBucketsAPI}
+      <div className="footerFix">
+        <Container className="spacing">
+          <h1 style={{ textAlign: "center" }} class="display-4">
+            Edit Buckets
+          </h1>
+          <Container>
+            <Row className="justify-content-md-center spacing">
+              <InputGroup size="lg">
+                <InputGroup.Text id="inputGroup-sizing-lg">
+                  Estimated Montly Income:{" "}
+                </InputGroup.Text>
+                <FormControl
+                  aria-label="Large"
+                  aria-describedby="inputGroup-sizing-sm"
+                  type="text"
+                  id="TotalAmount"
+                  onChange={this.incomeChange}
+                />
+              </InputGroup>
+            </Row>
+          </Container>
+          <Container>
+            <EditCards editData={this.state.bucket} addFunc={this.addToEditedBuckets} />
+            <Button
+              variant="success"
+              style={{ marginRight: "1em" }}
+              type="submit"
+              value="Submit"
+              onClick={this.editBucketsAPI}
+            >
+              Submit
+            </Button>
+            <Button
+              className="applyButton"
+              style={{ marginRight: "1em" }}
+              type="submit"
+              onClick={this.newSpendingMonth}
+            >
+              New Month
+            </Button>
+            <Button
+              className="applyButton"
+              type="submit"
+              onClick={() => {
+                this.setState({ showAddBucket: true });
+              }}
+            >
+              Add Bucket
+            </Button>
+          </Container>
+
+          <Modal
+            show={this.state.showAddBucket}
+            onHide={() => this.setState({ showAddBucket: false, newBucketName: "" })}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
           >
-            Submit
-          </Button>
-          <Button  style={{ marginRight: "1em" }} type="submit" onClick={this.newSpendingMonth}>
-            New Month
-          </Button>
-          <Button type="submit" onClick={() => {this.setState({showAddBucket: true})}}>
-            Add Bucket
-          </Button>
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-vcenter">Add New Bucket</Modal.Title>
+            </Modal.Header>
+
+            <Alert
+              show={this.state.showAddError}
+              variant="danger"
+              onClose={() => this.setState({ showAddError: false })}
+              dismissible
+            >
+              <Alert.Heading>Invalid Selection</Alert.Heading>
+              <p>Please select a bucket name</p>
+            </Alert>
+            <Modal.Body>
+              <h4>Bucket Name:</h4>
+              <form onChange={this.handleNewBucketName}>{addList}</form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="success" onClick={this.addNewBucket}>
+                Submit
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </Container>
-
-
-
-
-        <Modal 
-        show={this.state.showAddBucket}
-        onHide={() => this.setState({showAddBucket: false, newBucketName: ""})}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Add New Bucket
-        </Modal.Title>
-      </Modal.Header>
-      
-      <Alert show={this.state.showAddError} variant="danger" onClose={() => this.setState({showAddError: false})} dismissible>        
-        <Alert.Heading>Invalid Selection</Alert.Heading>        
-          <p>Please select a bucket name</p> 
-      </Alert>
-      <Modal.Body>
-        
-        <h4>Bucket Name:</h4>
-        <form onChange={this.handleNewBucketName}>
-          {addList}
-        </form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={this.addNewBucket}>Submit</Button>
-      </Modal.Footer>
-    </Modal>
       </div>
     );
   }

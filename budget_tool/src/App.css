@@ -2,12 +2,19 @@
   background-color: #50104a;
   text-align: center;
 }
-
-.transTable {
-  height: auto;
-  overflow: scroll;
+.applyButton {
+  background-color: #50104a !important ;
+  color: white;
+  border-color: #50104a !important;
 }
-
+.applyButton:hover {
+  background-color: #440d3f !important ;
+  color: white;
+  border-color: #440d3f !important;
+}
+.applyButton:focus {
+  box-shadow: 0 0 0 0.25rem rgb(170 34 157 / 50%) !important;
+}
 .footer {
   background-color: #50104a;
   color: white;
@@ -18,7 +25,9 @@
   width: 100vw;
   display: inline-block;
 }
-
+.footerFix {
+  margin-bottom: 3em;
+}
 .spacing {
   padding-top: 1em;
   padding-bottom: 1em;
