@@ -24,7 +24,8 @@ export default class BucketEdit extends Component {
       totalBudget: "",
       showAddBucket: false,
       newBucketName: "",
-      showAddError: false
+      showAddError: false,
+      budgetTotal:0
     };
 
     this.addToEditedBuckets = this.addToEditedBuckets.bind(this);
@@ -41,10 +42,12 @@ export default class BucketEdit extends Component {
     }).then((response) => {
       console.log(response.data);
       let total = 0;
+      let budgetTot = 0;
       for (var i in response.data) {
         total += response.data[i].amountGoal;
+        budgetTot += response.data[i].percent;
       }
-      this.setState({ bucket: response.data, totalBudget: total });
+      this.setState({ bucket: response.data, totalBudget: total, budgetTotal: budgetTot });
     });
   }
 
@@ -72,7 +75,31 @@ export default class BucketEdit extends Component {
     this.setState({ editedIncome: event.target.value });
   }
 
-  editBucketsAPI() {
+  editBucketsAPI(e) {
+    e.preventDefault();
+
+    const bID = this.state.editedBuckets.map(x => x["id"]);
+    //var editedIds = this.state.editedBuckets.map(({ id }) => ({ id }));
+    console.log(bID)
+    var total = 0;
+    for(var x = 0; x < this.state.bucket.length; x++){
+      for(var j = 0; j< bID.length; j++){
+       
+        if(this.state.bucket[x].id != bID[j]){
+
+          
+          total += this.state.bucket[x]['percent'];
+        }
+      }
+      
+    }
+    console.log(total);
+    for(var x = 0; x < this.state.editedBuckets.length; x++){
+      total += parseInt(this.state.editedBuckets[x]['percent'])
+    }
+    if(total > 100){
+      alert("Cannot make a budget that is over 100%")
+    } else {
     axios({
       url: "editBucket",
       method: "PUT",
@@ -83,6 +110,7 @@ export default class BucketEdit extends Component {
       },
     });
     window.location.reload(false);
+  }
   }
   newSpendingMonth() {
     axios({
