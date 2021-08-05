@@ -50,30 +50,37 @@ export default class BudgetOverview extends Component {
       this.setState({ bucket: response.data, totalBudget: total });
     });
 
-    axios({
-      url: "https://newsapi.org/v2/everything?q=personal%20finance&language=en&apiKey=e431dd0a8f96426ebc5c52a5a61302d0&pagesize=100",
-      method: "GET",
+    axios.request({
+      url: 'https://bing-news-search1.p.rapidapi.com/news/search',
+      params: {q: 'personalfinance', safeSearch: 'Off', textFormat: 'Raw', freshness: 'Day', count: '100'},
+      headers: {
+        'x-bingapis-sdk': 'true',
+        'x-rapidapi-key': '0a12f397b8mshe786cda4507c65dp1e9364jsn7e9f59679159',
+        'x-rapidapi-host': 'bing-news-search1.p.rapidapi.com'
+      }
     }).then((response) => {
-      let max = response.data.articles.length - 1;
+      let max = response.data.value.length - 1;
       let min = 0;
       //this.getArticles(response.data.articles)
       this.setState({
         article1:
-          response.data.articles[Math.floor(Math.random() * (max - min * 2) + min * 2)],
+          response.data.value[Math.floor(Math.random() * (max - min * 2) + min * 2)],
         article2:
-          response.data.articles[Math.floor(Math.random() * (max - min * 2) + min * 2)],
+          response.data.value[Math.floor(Math.random() * (max - min * 2) + min * 2)],
         article3:
-          response.data.articles[Math.floor(Math.random() * (max - min * 2) + min * 2)],
+          response.data.value[Math.floor(Math.random() * (max - min * 2) + min * 2)],
         article4:
-          response.data.articles[Math.floor(Math.random() * (max / 2 - min) + min)],
+          response.data.value[Math.floor(Math.random() * (max / 2 - min) + min)],
         article5:
-          response.data.articles[Math.floor(Math.random() * (max / 2 - min) + min)],
+          response.data.value[Math.floor(Math.random() * (max / 2 - min) + min)],
       });
+      
       //console.log(this.state.article1.title)
     });
   }
-
+  //this.state.article1.image.thumbnail.contentUrl
   render() {
+    
     return (
       <div>
         <Container className="spacing">
@@ -92,9 +99,8 @@ export default class BudgetOverview extends Component {
           <h2>Some helpful financial articles:</h2>
           <Row className="spacing">
             <Card style={{ width: "15rem" }}>
-              <Card.Img variant="top" src={this.state.article1.urlToImage} />
               <Card.Body>
-                <Card.Title>{this.state.article1.title}</Card.Title>
+                <Card.Title>{this.state.article1.name}</Card.Title>
                 <Card.Text>{this.removeTags(this.state.article1.description)}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article1.url, "_blank")}
@@ -106,9 +112,8 @@ export default class BudgetOverview extends Component {
             </Card>
 
             <Card style={{ width: "15rem" }}>
-              <Card.Img variant="top" src={this.state.article2.urlToImage} />
               <Card.Body>
-                <Card.Title>{this.state.article2.title}</Card.Title>
+                <Card.Title>{this.state.article2.name}</Card.Title>
                 <Card.Text>{this.removeTags(this.state.article2.description)}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article2.url, "_blank")}
@@ -120,9 +125,8 @@ export default class BudgetOverview extends Component {
             </Card>
 
             <Card style={{ width: "15rem" }}>
-              <Card.Img variant="top" src={this.state.article3.urlToImage} />
               <Card.Body>
-                <Card.Title>{this.state.article3.title}</Card.Title>
+                <Card.Title>{this.state.article3.name}</Card.Title>
                 <Card.Text>{this.removeTags(this.state.article3.description)}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article3.url, "_blank")}
@@ -134,9 +138,8 @@ export default class BudgetOverview extends Component {
             </Card>
 
             <Card style={{ width: "15rem" }}>
-              <Card.Img variant="top" src={this.state.article4.urlToImage} />
               <Card.Body>
-                <Card.Title>{this.state.article4.title}</Card.Title>
+                <Card.Title>{this.state.article4.name}</Card.Title>
                 <Card.Text>{this.removeTags(this.state.article4.description)}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article4.url, "_blank")}
@@ -148,9 +151,8 @@ export default class BudgetOverview extends Component {
             </Card>
 
             <Card style={{ width: "15rem" }}>
-              <Card.Img variant="top" src={this.state.article5.urlToImage} />
               <Card.Body>
-                <Card.Title>{this.state.article5.title}</Card.Title>
+                <Card.Title>{this.state.article5.name}</Card.Title>
                 <Card.Text>{this.removeTags(this.state.article5.description)}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article5.url, "_blank")}
