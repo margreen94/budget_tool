@@ -37,10 +37,10 @@ export default class BucketCards extends Component {
             </Card.Body>
             <ListGroup className="list-group-flush">
               <ListGroupItem>
-                Total Spent: {this.props.cardData[i].amountSpent}
+                Total Spent: ${this.props.cardData[i].amountSpent}
               </ListGroupItem>
               <ListGroupItem>
-                Budget Goal: {this.props.cardData[i].amountGoal}
+                Budget Goal: ${this.props.cardData[i].amountGoal}
               </ListGroupItem>
               <ListGroupItem>
                 <div className="progress-bar" role="progressbar" id="bar"  style={{ width: ''+widthPercent+'%' , backgroundColor: setColor}}>
@@ -48,14 +48,14 @@ export default class BucketCards extends Component {
                 </div>
               </ListGroupItem>
               <ListGroupItem>
-                Amount Remaining:{" "}
+                Amount Remaining: $
                 {(
                   this.props.cardData[i].amountGoal -
                   this.props.cardData[i].amountSpent
                 ).toFixed(2)}
               </ListGroupItem>
               <ListGroupItem>
-                Percent of Budget: {this.props.cardData[i].percent}
+                Percent of Budget: {this.props.cardData[i].percent}%
               </ListGroupItem>
             </ListGroup>
             <Card.Body>

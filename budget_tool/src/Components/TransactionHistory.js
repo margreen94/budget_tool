@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Table, Accordion, Container } from "react-bootstrap";
+import { Table, Accordion, Container, Button } from "react-bootstrap";
 
 import React, { Component } from "react";
 import "../App.css";
@@ -236,7 +236,9 @@ export default class TransactionHistory extends Component {
                       />
                     </div>
                     <br></br>
-                    <button type="submit">Apply Filter</button>
+                    <Button variant="success" type="submit">
+                      Apply Filter
+                    </Button>
                   </form>
                 </div>
               </Accordion.Body>

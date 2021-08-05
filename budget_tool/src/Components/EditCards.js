@@ -70,16 +70,17 @@ export default class EditCards extends Component {
             </Card.Body>
             <ListGroup className="list-group-flush">
               <ListGroupItem>
-                Total Spent: {this.props.editData[i].amountSpent}
+                Total Spent: ${this.props.editData[i].amountSpent}
               </ListGroupItem>
               <ListGroupItem>
-                Budget Goal: {this.props.editData[i].amountGoal}
+                Budget Goal: ${this.props.editData[i].amountGoal}
               </ListGroupItem>
               <ListGroupItem>
-                Percent of Budget: {this.props.editData[i].percent}
+                Percent of Budget: {this.props.editData[i].percent}%
               </ListGroupItem>
               <input
                 type="number"
+                placeholder="Adjust Bucket Percentage Here"
                 id={this.props.editData[i].id}
                 name="fname"
                 onChange={this.setEditedBuckets}
