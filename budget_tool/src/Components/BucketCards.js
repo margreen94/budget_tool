@@ -24,6 +24,7 @@ export default class BucketCards extends Component {
         widthPercent = 100.00
       }
 
+      let cardLink = "/TransactionHistory?filter=" + this.props.cardData[i].name
       cards.push(
         <Col md={4} key={i} className="spacing">
           <Card>
@@ -58,7 +59,7 @@ export default class BucketCards extends Component {
               </ListGroupItem>
             </ListGroup>
             <Card.Body>
-              <Card.Link href="#">See All {this.props.cardData[i].name} Transactions</Card.Link>
+              <Card.Link href={cardLink}>See All {this.props.cardData[i].name} Transactions</Card.Link>
             </Card.Body>
           </Card>
         </Col>
