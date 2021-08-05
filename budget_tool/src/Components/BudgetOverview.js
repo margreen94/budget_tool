@@ -66,7 +66,7 @@ export default class BudgetOverview extends Component {
 
   render() {
     return (
-      <div>
+      <div className="footerFix">
         <Container className="spacing">
           {/* Pie chart */}
           <Row className="spacing">
@@ -89,7 +89,7 @@ export default class BudgetOverview extends Component {
                 <Card.Text>{this.state.article1.description}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article1.url, "_blank")}
-                  variant="primary"
+                  className="applyButton"
                 >
                   Go to Article
                 </Button>
@@ -103,7 +103,7 @@ export default class BudgetOverview extends Component {
                 <Card.Text>{this.state.article2.description}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article2.url, "_blank")}
-                  variant="primary"
+                  className="applyButton"
                 >
                   Go to Article
                 </Button>
@@ -117,7 +117,7 @@ export default class BudgetOverview extends Component {
                 <Card.Text>{this.state.article3.description}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article3.url, "_blank")}
-                  variant="primary"
+                  className="applyButton"
                 >
                   Go to Article
                 </Button>
@@ -131,7 +131,7 @@ export default class BudgetOverview extends Component {
                 <Card.Text>{this.state.article4.description}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article4.url, "_blank")}
-                  variant="primary"
+                  className="applyButton"
                 >
                   Go to Article
                 </Button>
@@ -145,7 +145,7 @@ export default class BudgetOverview extends Component {
                 <Card.Text>{this.state.article5.description}</Card.Text>
                 <Button
                   onClick={() => window.open(this.state.article5.url, "_blank")}
-                  variant="primary"
+                  className="applyButton"
                 >
                   Go to Article
                 </Button>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Row } from "react-bootstrap";
 import {
@@ -100,14 +101,24 @@ export default class EditCards extends Component {
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">Add New Bucket</Modal.Title>
+            <Modal.Title id="contained-modal-title-vcenter">
+              Delete This Bucket
+            </Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
             <p>Are you sure you want to delete this bucket?</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.deleteBucket}>Yes</Button>
+            <Button variant="danger" onClick={this.deleteBucket}>
+              Delete
+            </Button>
+            <Button
+              variant="light"
+              onClick={() => this.setState({ showConfirmDelete: false })}
+            >
+              No
+            </Button>
           </Modal.Footer>
         </Modal>
       </Row>
