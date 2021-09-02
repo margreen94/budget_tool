@@ -26,8 +26,7 @@ export default class BucketEdit extends Component {
       showAddBucket: false,
       newBucketName: "",
       showAddError: false,
-      budgetTotal:0
-
+      budgetTotal: 0,
     };
 
     this.addToEditedBuckets = this.addToEditedBuckets.bind(this);
@@ -49,7 +48,11 @@ export default class BucketEdit extends Component {
         total += response.data[i].amountGoal;
         budgetTot += response.data[i].percent;
       }
-      this.setState({ bucket: response.data, totalBudget: total, budgetTotal: budgetTot });
+      this.setState({
+        bucket: response.data,
+        totalBudget: total,
+        budgetTotal: budgetTot,
+      });
     });
   }
 
@@ -80,39 +83,35 @@ export default class BucketEdit extends Component {
   editBucketsAPI(e) {
     e.preventDefault();
 
-    const bID = this.state.editedBuckets.map(x => x["id"]);
+    const bID = this.state.editedBuckets.map((x) => Number.parseInt(x["id"]));
     //var editedIds = this.state.editedBuckets.map(({ id }) => ({ id }));
-    console.log(bID)
+    console.log(bID);
     var total = 0;
-    for(var x = 0; x < this.state.bucket.length; x++){
-      for(var j = 0; j< bID.length; j++){
-       
-        if(this.state.bucket[x].id != bID[j]){
-
-          
-          total += this.state.bucket[x]['percent'];
-        }
+    var flag = false;
+    for (var x = 0; x < this.state.bucket.length; x++) {
+      if (!bID.includes(this.state.bucket[x].id)) {
+        total += this.state.bucket[x]["percent"];
+        console.log(x + " " + total);
       }
-      
     }
     console.log(total);
-    for(var x = 0; x < this.state.editedBuckets.length; x++){
-      total += parseInt(this.state.editedBuckets[x]['percent'])
+    for (var x = 0; x < this.state.editedBuckets.length; x++) {
+      total += parseInt(this.state.editedBuckets[x]["percent"]);
     }
-    if(total > 100){
-      alert("Cannot make a budget that is over 100%")
+    if (total > 101) {
+      alert("Cannot make a budget that is over 100%");
     } else {
-    axios({
-      url: "editBucket",
-      method: "PUT",
-      data: {
-        income: this.state.editedIncome,
-        buckets: this.state.editedBuckets,
-        accountId: 25,
-      },
-    });
-    window.location.reload(false);
-  }
+      axios({
+        url: "editBucket",
+        method: "PUT",
+        data: {
+          income: this.state.editedIncome,
+          buckets: this.state.editedBuckets,
+          accountId: 25,
+        },
+      });
+      window.location.reload(false);
+    }
   }
   newSpendingMonth() {
     axios({
@@ -202,7 +201,10 @@ export default class BucketEdit extends Component {
             </Row>
           </Container>
           <Container>
-            <EditCards editData={this.state.bucket} addFunc={this.addToEditedBuckets} />
+            <EditCards
+              editData={this.state.bucket}
+              addFunc={this.addToEditedBuckets}
+            />
             <Button
               variant="success"
               style={{ marginRight: "1em" }}
@@ -233,13 +235,17 @@ export default class BucketEdit extends Component {
 
           <Modal
             show={this.state.showAddBucket}
-            onHide={() => this.setState({ showAddBucket: false, newBucketName: "" })}
+            onHide={() =>
+              this.setState({ showAddBucket: false, newBucketName: "" })
+            }
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
           >
             <Modal.Header closeButton>
-              <Modal.Title id="contained-modal-title-vcenter">Add New Bucket</Modal.Title>
+              <Modal.Title id="contained-modal-title-vcenter">
+                Add New Bucket
+              </Modal.Title>
             </Modal.Header>
 
             <Alert
